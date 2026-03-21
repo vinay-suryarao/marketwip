@@ -44,13 +44,13 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="relative mx-auto flex w-full max-w-[1200px] flex-1 items-center justify-center px-6 py-20 min-h-[80vh]">
+    <main className="relative mx-auto flex w-full max-w-[1200px] flex-1 items-center justify-center px-4 py-10 min-h-[70vh] sm:px-6 sm:py-20 sm:min-h-[80vh]">
       {/* Background Neon Orbs */}
       <div className="absolute top-[30%] left-[-10%] w-[450px] h-[450px] bg-[#C100FF] rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none z-0 animate-pulse-slow"></div>
       <div className="absolute bottom-[-10%] right-[0%] w-[500px] h-[500px] bg-[#34E0A1] rounded-full mix-blend-screen filter blur-[150px] opacity-15 pointer-events-none z-0" style={{ animationDelay: '3s' }}></div>
 
-      <section className="relative z-10 grid w-full max-w-5xl rounded-[2.5rem] border border-[#1A2552] bg-[#0A102E]/80 backdrop-blur-2xl p-4 shadow-[0_30px_60px_rgba(0,0,0,0.5)] md:grid-cols-2">
-        <aside className="rounded-[2rem] bg-gradient-to-br from-[#C100FF] to-[#4353FF] p-10 text-white flex flex-col justify-center shadow-[0_0_30px_rgba(193,0,255,0.3)]">
+      <section className="relative z-10 grid w-full max-w-5xl rounded-2xl border border-[#1A2552] bg-[#0A102E]/80 p-3 shadow-[0_30px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:rounded-[2.5rem] sm:p-4 md:grid-cols-2">
+        <aside className="hidden flex-col justify-center rounded-[2rem] bg-gradient-to-br from-[#C100FF] to-[#4353FF] p-10 text-white shadow-[0_0_30px_rgba(193,0,255,0.3)] md:flex">
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/80 mix-blend-overlay">Market W.I.P</p>
           <h1 className="mt-4 text-4xl sm:text-5xl border-b border-white/20 pb-6 mb-6 font-extrabold font-display leading-tight drop-shadow-md">
             Start Your Journey
@@ -60,9 +60,9 @@ export default function SignupPage() {
           </p>
         </aside>
 
-        <form onSubmit={onSubmit} className="flex flex-col justify-center p-8 lg:px-14">
-          <h2 className="text-3xl font-extrabold font-display text-white mb-1">Register</h2>
-          <p className="text-[15px] font-medium text-[#8B95A5] mb-8">Setup your account in seconds.</p>
+        <form onSubmit={onSubmit} className="flex flex-col justify-center p-5 sm:p-8 lg:px-14">
+          <h2 className="mb-1 text-2xl font-extrabold font-display text-white sm:text-3xl">Register</h2>
+          <p className="mb-6 text-[14px] font-medium text-[#8B95A5] sm:mb-8 sm:text-[15px]">Setup your account in seconds.</p>
 
           <div className="space-y-4 mb-8">
             <Input

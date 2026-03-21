@@ -42,10 +42,10 @@ const quickLinks = [
 export default function Footer() {
   return (
     <footer className="mt-14 border-t border-[#1A2552] bg-[#060B19]/80 backdrop-blur-xl text-[#8B95A5]">
-      <section className="mx-auto grid w-full max-w-[1200px] gap-8 px-6 py-12 md:grid-cols-3 md:px-8">
+      <section className="mx-auto grid w-full max-w-[1200px] gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 md:px-8 md:py-12">
         <div>
           <div className="mb-4">
-            <LogoComponent textClassName="text-3xl" />
+            <LogoComponent textClassName="text-2xl sm:text-3xl" />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#8B95A5]">
             Where market awareness meets action. Track your wishlist tags, get updates, and manage news with a clear workflow.
@@ -54,7 +54,7 @@ export default function Footer() {
 
         <div className="md:pl-10">
           <h4 className="text-xl font-bold text-white mb-6">Quick Links</h4>
-          <ul className="space-y-3 text-sm font-bold">
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm font-bold md:block md:space-y-3">
             {quickLinks.map((link) => (
               <li key={link.href}>
                 <Link className="transition-colors hover:text-[#00F0FF]" href={link.href}>
@@ -70,7 +70,7 @@ export default function Footer() {
           <ul className="space-y-4 text-sm text-[#8B95A5] font-medium">
             <li className="flex items-center gap-3">
                <span className="w-8 h-8 rounded-full bg-[#1A2552] flex items-center justify-center text-[#00F0FF]">✉</span>
-               marketwip1@gmail.com
+              <span className="break-all">marketwip1@gmail.com</span>
             </li>
             <li className="flex items-center gap-3">
                <span className="w-8 h-8 rounded-full bg-[#1A2552] flex items-center justify-center text-[#C100FF]">📍</span>

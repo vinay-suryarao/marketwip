@@ -3,9 +3,9 @@ import WishlistManager from "@/components/dashboard/WishlistManager";
 
 export default function DashboardPage() {
   return (
-    <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-8 px-6 py-10 md:px-8">
-      <section className="rounded-3xl border border-[#1A2552] bg-[#0A102E] p-7 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
-        <h1 className="text-4xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00F0FF]">Central Dashboard</h1>
+    <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-8 px-4 py-8 sm:px-6 md:px-8 md:py-10">
+      <section className="rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] sm:rounded-3xl sm:p-7">
+        <h1 className="bg-gradient-to-r from-white to-[#00F0FF] bg-clip-text text-3xl font-extrabold font-display text-transparent sm:text-4xl">Central Dashboard</h1>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-[#8B95A5] font-medium">
           Manage your stock watchlist, monitor market feeds, and access key sections quickly from one organized workspace.
         </p>
@@ -22,14 +22,14 @@ export default function DashboardPage() {
         <WishlistManager />
       </section>
 
-      <section className="rounded-3xl border border-[#1A2552] bg-[#0A102E] p-6 shadow-2xl md:p-7 relative overflow-hidden">
+      <section className="relative overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-2xl sm:rounded-3xl md:p-7">
         {/* Glow effect */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-[#4353FF] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
 
         <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#1A2552] pb-5 relative z-10">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#34E0A1]">Market Workflow</p>
-            <h2 className="mt-2 text-2xl font-bold font-display text-white">Your daily execution path</h2>
+            <h2 className="mt-2 text-xl font-bold font-display text-white sm:text-2xl">Your daily execution path</h2>
           </div>
           <Link
             href="/news"

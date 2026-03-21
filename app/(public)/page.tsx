@@ -53,7 +53,7 @@ function useInView(threshold = 0.15) {
    ═══════════════════════════════════════════════════════════ */
 function HeroVisuals() {
     return (
-        <div className="relative w-full max-w-[500px] aspect-[4/5] mx-auto lg:ml-auto flex flex-col justify-end pb-10">
+        <div className="relative mx-auto flex w-full max-w-[360px] aspect-[4/5] flex-col justify-end pb-4 sm:max-w-[500px] sm:pb-10 lg:ml-auto">
             {/* Top Light Rays (Volumetric Light) */}
             <div className="absolute top-[-30%] left-1/2 -translate-x-1/2 w-[200%] h-[100%] bg-[conic-gradient(from_180deg_at_50%_0%,rgba(243,166,35,0)_0%,rgba(243,166,35,0.05)_40%,rgba(243,166,35,0.2)_50%,rgba(243,166,35,0.05)_60%,rgba(243,166,35,0)_100%)] blur-[40px] pointer-events-none z-0"></div>
             <div className="absolute top-[-30%] left-1/2 -translate-x-1/2 w-[100%] h-[100%] bg-[conic-gradient(from_180deg_at_50%_0%,rgba(52,224,161,0)_0%,rgba(52,224,161,0.05)_45%,rgba(52,224,161,0.15)_50%,rgba(52,224,161,0.05)_55%,rgba(52,224,161,0)_100%)] blur-[20px] pointer-events-none z-0"></div>
@@ -66,7 +66,7 @@ function HeroVisuals() {
             <div className="absolute top-[10%] left-1/2 w-2 h-2 bg-white rounded-full opacity-50 animate-ping"></div>
 
             {/* Glowing Main Line Chart */}
-            <div className="relative z-10 w-full h-[320px] flex items-end justify-between px-4">
+            <div className="relative z-10 flex h-[250px] w-full items-end justify-between px-3 sm:h-[320px] sm:px-4">
                 <svg className="absolute inset-0 w-full h-full overflow-visible" viewBox="0 0 400 320">
                     <defs>
                         <linearGradient id="lineGrad" x1="0" y1="1" x2="1" y2="0">
@@ -153,7 +153,7 @@ function HeroVisuals() {
             </div>
 
             {/* Bottom Dashboard Panel */}
-            <div className="relative z-20 w-[115%] -ml-[7.5%] h-[150px] bg-[#0A102E] border-t-2 border-r-2 border-[#1A2552] shadow-[0_-15px_60px_rgba(0,0,0,0.9)] rounded-t-2xl p-6 flex flex-col justify-between overflow-hidden">
+            <div className="relative z-20 -ml-0 h-[130px] w-full overflow-hidden rounded-t-2xl border-r-2 border-t-2 border-[#1A2552] bg-[#0A102E] p-4 shadow-[0_-15px_60px_rgba(0,0,0,0.9)] sm:-ml-[7.5%] sm:h-[150px] sm:w-[115%] sm:p-6">
                 {/* Subtle base glow inside the box */}
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-[#F3A623] blur-[60px] opacity-10 pointer-events-none"></div>
 
@@ -179,7 +179,7 @@ function HeroVisuals() {
                             <div className="w-1.5 h-[60%] bg-[#34E0A1] rounded-t-sm shadow-[0_0_8px_#34E0A1]"></div>
                         </div>
                         {/* Mini Sparkline Line Chart */}
-                        <div className="w-[90px] h-[60px] relative mt-1 ml-2">
+                        <div className="relative mt-1 ml-2 h-[52px] w-[72px] sm:h-[60px] sm:w-[90px]">
                             <svg viewBox="0 0 100 50" className="w-full h-full overflow-visible">
                                 <path d="M0,40 L15,25 L30,45 L50,15 L65,35 L80,10 L100,5" fill="none" stroke="#00F0FF" strokeWidth="2.5" filter="url(#glowLight)"/>
                                 <circle cx="100" cy="5" r="3" fill="#FFFFFF" stroke="#00F0FF" strokeWidth="2" filter="url(#glowLight)"/>
@@ -283,11 +283,11 @@ function CrisisStatCard({ value, suffix, label, highlight, index, inView }: { va
     const animClass = index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right';
 
     return (
-        <div ref={ref as any} className={`p-8 rounded-[2rem] text-center transition-all duration-500 hover:scale-[1.03] border ${highlight
+        <div ref={ref as any} className={`rounded-[1.5rem] border p-5 text-center transition-all duration-500 hover:scale-[1.03] sm:rounded-[2rem] sm:p-8 ${highlight
             ? 'bg-gradient-to-b from-[#1A56FF]/20 to-[#0A102E] border-[#4353FF]/50 shadow-[0_8px_30px_-10px_rgba(67,83,255,0.4)]'
             : 'bg-[#0A102E] border-[#1A2552] shadow-xl'
             } ${inView ? animClass : 'opacity-0'}`}>
-            <div className={`text-4xl sm:text-5xl font-extrabold font-display ${highlight ? 'text-[#00F0FF]' : 'text-white'}`}>
+            <div className={`text-3xl font-extrabold font-display sm:text-5xl ${highlight ? 'text-[#00F0FF]' : 'text-white'}`}>
                 {count.toLocaleString()}{suffix}
             </div>
             <div className="text-[15px] font-bold text-[#8B95A5] mt-4 leading-tight">{label}</div>
@@ -318,17 +318,17 @@ export default function LandingPage() {
     const crisisView = useInView(0.1);
 
     return (
-        <main className="flex flex-col flex-1 relative overflow-hidden font-sans selection:bg-[#4353FF]/50 selection:text-white pb-32">
+        <main className="relative flex flex-1 flex-col overflow-hidden pb-20 font-sans selection:bg-[#4353FF]/50 selection:text-white sm:pb-32">
 
             {/* NEON BACKGROUND ORBS */}
-            <div className="absolute top-[-10%] left-[0%] w-[800px] h-[800px] bg-[#1A56FF] rounded-full mix-blend-screen filter blur-[180px] opacity-40 animate-pulse-slow pointer-events-none z-0"></div>
-            <div className="absolute top-[20%] right-[-10%] w-[700px] h-[700px] bg-[#C100FF] rounded-full mix-blend-screen filter blur-[180px] opacity-30 animate-pulse-slow pointer-events-none z-0" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute top-[60%] left-[-20%] w-[600px] h-[600px] bg-[#34E0A1] rounded-full mix-blend-screen filter blur-[180px] opacity-20 animate-pulse-slow pointer-events-none z-0" style={{ animationDelay: '4s' }}></div>
+            <div className="pointer-events-none absolute left-[-35%] top-[-5%] z-0 h-[420px] w-[420px] animate-pulse-slow rounded-full bg-[#1A56FF] opacity-40 mix-blend-screen blur-[140px] sm:left-[0%] sm:top-[-10%] sm:h-[800px] sm:w-[800px] sm:blur-[180px]"></div>
+            <div className="pointer-events-none absolute right-[-35%] top-[20%] z-0 h-[380px] w-[380px] animate-pulse-slow rounded-full bg-[#C100FF] opacity-30 mix-blend-screen blur-[140px] sm:right-[-10%] sm:h-[700px] sm:w-[700px] sm:blur-[180px]" style={{ animationDelay: '2s' }}></div>
+            <div className="pointer-events-none absolute left-[-35%] top-[62%] z-0 h-[360px] w-[360px] animate-pulse-slow rounded-full bg-[#34E0A1] opacity-20 mix-blend-screen blur-[140px] sm:left-[-20%] sm:h-[600px] sm:w-[600px] sm:blur-[180px]" style={{ animationDelay: '4s' }}></div>
 
             {/* ═══ HERO SECTION ═══ */}
-            <section className="relative z-10 px-6 pt-24 pb-32 mx-auto w-full max-w-[1300px] flex flex-col lg:flex-row items-center justify-between gap-16 min-h-[90vh]">
+            <section className="relative z-10 mx-auto flex w-full max-w-[1300px] flex-col items-center justify-between gap-10 px-4 pb-16 pt-12 sm:gap-16 sm:px-6 sm:pb-32 sm:pt-24 lg:min-h-[90vh] lg:flex-row">
                 
-                <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div className="flex flex-col items-center text-center lg:w-1/2 lg:items-start lg:text-left">
                     <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#00F0FF] text-[13px] font-bold tracking-widest uppercase mb-10 shadow-[0_0_20px_rgba(0,240,255,0.15)]"
                         style={{ transform: `translateY(${scrollY * 0.1}px)`, opacity: Math.max(0, 1 - scrollY * 0.002) }}>
                         <span className="w-2.5 h-2.5 bg-[#C100FF] rounded-full animate-pulse shadow-[0_0_10px_#C100FF]"></span>
@@ -336,43 +336,43 @@ export default function LandingPage() {
                     </div>
 
                     <div style={{ transform: `translateY(${scrollY * 0.12}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
-                        <h1 className="text-6xl sm:text-7xl lg:text-[5rem] font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-[#00F0FF] to-[#8B22FF] tracking-tight leading-tight mb-2">
+                        <h1 className="mb-2 bg-gradient-to-r from-[#00F0FF] to-[#8B22FF] bg-clip-text text-5xl font-extrabold leading-tight tracking-tight text-transparent sm:text-7xl lg:text-[5rem]">
                             Market News
                         </h1>
-                        <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-extrabold font-display text-white tracking-tight pb-2">
+                        <h1 className="pb-2 text-5xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-[5.5rem]">
                             Structured.
                         </h1>
                     </div>
 
-                    <p className="text-lg sm:text-xl text-[#8B95A5] mt-6 max-w-[480px] font-medium leading-relaxed"
+                    <p className="mt-6 max-w-[480px] text-base font-medium leading-relaxed text-[#8B95A5] sm:text-xl"
                         style={{ transform: `translateY(${scrollY * 0.1}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
                         Track stock-specific updates, filter by market categories, and stay aligned with important moves using our beautiful, noise-free dashboard.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-6 mt-14"
+                    <div className="mt-10 flex w-full flex-col items-center gap-4 sm:mt-14 sm:w-auto sm:flex-row sm:gap-6"
                         style={{ transform: `translateY(${scrollY * 0.06}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
-                        <Link href="/news" className="group rounded-full bg-[#4353FF] px-10 py-4 text-lg font-bold text-white shadow-[0_0_30px_rgba(67,83,255,0.5)] transition hover:scale-105 hover:bg-[#5C6EFF]">
+                        <Link href="/news" className="group w-full rounded-full bg-[#4353FF] px-10 py-3 text-center text-base font-bold text-white shadow-[0_0_30px_rgba(67,83,255,0.5)] transition hover:scale-105 hover:bg-[#5C6EFF] sm:w-auto sm:py-4 sm:text-lg">
                             Get Started
                         </Link>
-                        <Link href="#how-it-works" className="rounded-full border border-white/20 bg-transparent px-10 py-4 text-lg font-bold text-white transition hover:bg-white/5 hover:border-white/40 shadow-xl">
+                        <Link href="#how-it-works" className="w-full rounded-full border border-white/20 bg-transparent px-10 py-3 text-center text-base font-bold text-white shadow-xl transition hover:border-white/40 hover:bg-white/5 sm:w-auto sm:py-4 sm:text-lg">
                             How it works?
                         </Link>
                     </div>
                 </div>
 
-                <div className="lg:w-1/2 w-full mt-16 lg:mt-0" style={{ transform: `translateY(${scrollY * 0.04}px)` }}>
+                <div className="mt-6 w-full lg:mt-0 lg:w-1/2" style={{ transform: `translateY(${scrollY * 0.04}px)` }}>
                     <HeroVisuals />
                 </div>
             </section>
 
             {/* ═══ THE PROBLEM STATS ═══ */}
-            <section ref={crisisView.ref as any} className="relative z-10 px-6 py-24 mt-20">
+            <section ref={crisisView.ref as any} className="relative z-10 mt-10 px-4 py-16 sm:mt-20 sm:px-6 sm:py-24">
                 <div className="max-w-[1200px] mx-auto">
-                    <div className={`text-center mb-16 transition-all duration-1000 ${crisisView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                        <h2 className="text-4xl sm:text-5xl font-extrabold font-display text-white leading-tight">
+                    <div className={`mb-12 text-center transition-all duration-1000 sm:mb-16 ${crisisView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                        <h2 className="text-3xl font-extrabold font-display leading-tight text-white sm:text-5xl">
                             Why Retail Misses Out
                         </h2>
-                        <p className="text-[#8B95A5] font-medium mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
+                        <p className="mx-auto mt-5 max-w-2xl text-base font-medium leading-relaxed text-[#8B95A5] sm:mt-6 sm:text-lg">
                             The internet produces too much noise. Finding the actual sector and company updates that affect your portfolio requires dedicated filtering tools.
                         </p>
                     </div>
@@ -386,28 +386,28 @@ export default function LandingPage() {
             </section>
 
             {/* ═══ FEATURES ═══ */}
-            <section ref={featuresView.ref as any} className="relative z-10 px-6 py-24 max-w-[1200px] mx-auto mt-10">
-                <div className={`text-center mb-20 transition-all duration-1000 ${featuresView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <h2 className="text-4xl sm:text-6xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00F0FF] pb-2">
+            <section ref={featuresView.ref as any} className="relative z-10 mx-auto mt-10 max-w-[1200px] px-4 py-16 sm:px-6 sm:py-24">
+                <div className={`mb-12 text-center transition-all duration-1000 sm:mb-20 ${featuresView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    <h2 className="bg-gradient-to-r from-white to-[#00F0FF] bg-clip-text pb-2 text-3xl font-extrabold font-display text-transparent sm:text-6xl">
                         Everything You Need
                     </h2>
-                    <p className="text-[#8B95A5] font-medium mt-4 text-lg">A unified, real-time dashboard for market headlines.</p>
+                    <p className="mt-4 text-base font-medium text-[#8B95A5] sm:text-lg">A unified, real-time dashboard for market headlines.</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {featuresView.inView && FEATURES.map((f, i) => (
                         <div
                             key={i}
-                            className={`bg-[#0A102E] border border-[#1A2552] block p-10 rounded-[2.5rem] shadow-xl transition-all duration-500
+                            className={`block rounded-[1.5rem] border border-[#1A2552] bg-[#0A102E] p-6 shadow-xl transition-all duration-500 sm:rounded-[2.5rem] sm:p-10
                                 ${i % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'}`}
                         >
-                            <div className="w-16 h-16 bg-[#1A2552] border border-[#4353FF]/30 rounded-2xl flex items-center justify-center text-2xl mb-8 shadow-inner">
+                            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#4353FF]/30 bg-[#1A2552] text-2xl shadow-inner sm:mb-8 sm:h-16 sm:w-16">
                                 {f.icon}
                             </div>
-                            <h3 className="text-2xl font-bold font-display text-white mb-3 tracking-wide">
+                            <h3 className="mb-3 text-xl font-bold font-display tracking-wide text-white sm:text-2xl">
                                 {f.title}
                             </h3>
-                            <p className="text-[16px] text-[#8B95A5] leading-relaxed font-medium">
+                            <p className="text-[15px] font-medium leading-relaxed text-[#8B95A5] sm:text-[16px]">
                                 {f.desc}
                             </p>
                         </div>
@@ -418,16 +418,16 @@ export default function LandingPage() {
 
 
             {/* ═══ HOW IT WORKS ═══ */}
-            <section id="how-it-works" ref={stepsView.ref as any} className="relative z-10 px-6 py-32 max-w-[1200px] mx-auto border-t border-[#1A2552] bg-[#0A102E]/60 backdrop-blur-3xl rounded-[4rem] my-20 shadow-2xl">
-                <div className={`text-center mb-24 transition-all duration-1000 ${stepsView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                    <h2 className="text-4xl sm:text-6xl font-extrabold font-display text-white">How It Works</h2>
+            <section id="how-it-works" ref={stepsView.ref as any} className="relative z-10 mx-auto my-12 max-w-[1200px] rounded-[2rem] border-t border-[#1A2552] bg-[#0A102E]/60 px-4 py-16 shadow-2xl backdrop-blur-3xl sm:my-20 sm:rounded-[4rem] sm:px-6 sm:py-24 md:py-32">
+                <div className={`mb-14 text-center transition-all duration-1000 sm:mb-24 ${stepsView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                    <h2 className="text-3xl font-extrabold font-display text-white sm:text-6xl">How It Works</h2>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 relative">
+                <div className="relative grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-16">
                     <div className={`hidden sm:block absolute top-[4rem] left-[15%] right-[15%] h-1 bg-[linear-gradient(to_right,rgba(67,83,255,0),#4353FF,rgba(67,83,255,0))] transition-all duration-1500 ${stepsView.inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transformOrigin: 'center' }}></div>
                     {stepsView.inView && STEPS.map((s, i) => (
                         <div key={i} className={`text-center relative group z-10 ${i % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'}`}>
-                            <div className="w-[8rem] h-[8rem] mx-auto bg-[#060B19] border-4 border-[#1A2552] rounded-[2.5rem] flex items-center justify-center text-4xl shadow-[0_0_30px_rgba(67,83,255,0.2)] mb-8 relative z-20 group-hover:bg-gradient-to-br group-hover:from-[#C100FF] group-hover:to-[#4353FF] group-hover:border-transparent transition-all duration-500">
+                            <div className="relative z-20 mx-auto mb-6 flex h-[6.5rem] w-[6.5rem] items-center justify-center rounded-[2rem] border-4 border-[#1A2552] bg-[#060B19] text-4xl shadow-[0_0_30px_rgba(67,83,255,0.2)] transition-all duration-500 group-hover:border-transparent group-hover:bg-gradient-to-br group-hover:from-[#C100FF] group-hover:to-[#4353FF] sm:mb-8 sm:h-[8rem] sm:w-[8rem] sm:rounded-[2.5rem]">
                                 <span className="relative z-10 drop-shadow-md">{s.icon}</span>
                             </div>
                             <div className="text-sm font-bold text-[#00F0FF] tracking-[0.2em] mb-4 uppercase">STEP {s.num}</div>

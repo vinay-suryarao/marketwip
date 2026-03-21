@@ -84,10 +84,10 @@ function EditPostPage() {
 
   return (
     <AdminGate>
-      <main className="mx-auto w-full max-w-[1200px] px-6 py-10 md:px-8">
+      <main className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 md:px-8 md:py-10">
         {error ? <PromptToast message={error} tone="error" /> : null}
 
-        <div className="rounded-[2rem] border border-[#1A2552] bg-[#0A102E] p-8 shadow-2xl relative overflow-hidden">
+        <div className="relative overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-2xl sm:rounded-[2rem] sm:p-8">
           {/* Subtle Glow */}
           <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-[#00F0FF] rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
 

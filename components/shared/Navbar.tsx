@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOutUser } from "@/lib/firebase/auth";
@@ -52,6 +53,11 @@ const tickerItems = [
 export default function Navbar() {
   const { user, isAdmin } = useAuth();
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   const navLinks = isAdmin
     ? [...links, { href: "/admin/dashboard", label: "Admin Dashboard" }]
@@ -71,12 +77,23 @@ export default function Navbar() {
         </div>
       </div>
 
-      <nav className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-5 py-4 md:px-8">
-        <Link href="/" className="flex items-center gap-3">
-          <LogoComponent textClassName="text-[22px]" />
-        </Link>
+      <nav className="mx-auto w-full max-w-[1200px] px-4 py-3 md:px-8 md:py-4">
+        <div className="flex items-center justify-between gap-3">
+          <Link href="/" className="flex min-w-0 items-center gap-3">
+            <LogoComponent textClassName="text-lg sm:text-[22px]" />
+          </Link>
 
-        <div className="flex items-center gap-3 md:gap-6">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#1A2552] bg-[#0A102E] text-white transition hover:border-[#4353FF] md:hidden"
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle menu"
+          >
+            <span className="text-lg leading-none">{isMobileMenuOpen ? "×" : "≡"}</span>
+          </button>
+
+          <div className="hidden items-center gap-3 md:flex md:gap-6">
           <ul className="hidden items-center gap-6 text-[15px] font-bold text-[#8B95A5] md:flex">
             {navLinks.map((link) => {
               const active =
@@ -140,7 +157,70 @@ export default function Navbar() {
               </button>
             </div>
           )}
+          </div>
         </div>
+
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
+          {navLinks.map((link) => {
+            const active =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+            return (
+              <Link
+                key={`mobile-chip-${link.href}`}
+                href={link.href}
+                className={`whitespace-nowrap rounded-full border px-4 py-2 text-xs font-bold transition ${
+                  active
+                    ? "border-[#00F0FF] bg-[#00F0FF]/10 text-[#00F0FF]"
+                    : "border-[#1A2552] bg-[#0A102E] text-[#8B95A5] hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {isMobileMenuOpen ? (
+          <div className="mt-3 space-y-2 rounded-2xl border border-[#1A2552] bg-[#0A102E]/95 p-3 md:hidden">
+            {!user ? (
+              <>
+                <Link
+                  className="block rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/10"
+                  href="/login"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="block rounded-xl border border-[#4353FF] bg-[#4353FF] px-4 py-2.5 text-sm font-bold text-white transition hover:bg-[#5C6EFF]"
+                  href="/signup"
+                >
+                  Register
+                </Link>
+              </>
+            ) : (
+              <>
+                {!isAdmin ? (
+                  <Link
+                    className="block rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-white/10"
+                    href="/wishlist"
+                  >
+                    Wishlist
+                  </Link>
+                ) : null}
+                <button
+                  type="button"
+                  onClick={() => signOutUser()}
+                  className="block w-full rounded-xl border border-[#4353FF] bg-[#4353FF] px-4 py-2.5 text-left text-sm font-bold text-white transition hover:bg-[#5C6EFF]"
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
+        ) : null}
       </nav>
     </header>
   );

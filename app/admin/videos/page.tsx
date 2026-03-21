@@ -58,10 +58,10 @@ export default function AdminVideosPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-[1200px] flex-1 px-6 py-10 md:px-8">
+    <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-8 sm:px-6 md:px-8 md:py-10">
       {prompt ? <PromptToast message={prompt.message} tone={prompt.tone} /> : null}
 
-      <section className="rounded-[2rem] border border-[#1A2552] bg-[#0A102E] p-8 shadow-2xl relative overflow-hidden">
+      <section className="relative overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-2xl sm:rounded-[2rem] sm:p-8">
         {/* Glow */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-[#00F0FF] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#1A2552] pb-5 relative z-10">
@@ -87,7 +87,7 @@ export default function AdminVideosPage() {
         />
       </section>
 
-      <section className="mt-8 overflow-hidden rounded-[2rem] border border-[#1A2552] bg-[#0A102E] shadow-2xl relative">
+      <section className="relative mt-8 overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] shadow-2xl sm:rounded-[2rem]">
         <div className="border-b border-[#1A2552] bg-[#060B19]/50 px-7 py-5">
           <h2 className="text-xl font-bold font-display text-white">Manage Videos</h2>
         </div>

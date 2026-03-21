@@ -32,18 +32,18 @@ function AdminDashboardPage() {
 
   return (
     <AdminGate>
-      <main className="mx-auto w-full max-w-[1200px] flex-1 px-6 py-10 md:px-8">
+      <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-8 sm:px-6 md:px-8 md:py-10">
         {prompt ? <PromptToast message={prompt.message} tone={prompt.tone} /> : null}
 
-        <section className="rounded-3xl border border-[#1A2552] bg-[#0A102E] p-7 shadow-2xl relative overflow-hidden">
+        <section className="relative overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-2xl sm:rounded-3xl sm:p-7">
           {/* Glow */}
           <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-[#4353FF] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#1A2552] pb-5 relative z-10">
             <div>
-              <h1 className="text-4xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00F0FF]">Central Dashboard</h1>
+              <h1 className="bg-gradient-to-r from-white to-[#00F0FF] bg-clip-text text-3xl font-extrabold font-display text-transparent sm:text-4xl">Central Dashboard</h1>
               <p className="mt-2 text-sm text-[#8B95A5] font-medium">Manage market posts, edit updates, and keep stock feeds current.</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
               <Link href="/admin/videos">
                 <button className="rounded-xl border border-[#1A2552] bg-[#060B19] px-5 py-2.5 text-sm font-bold tracking-wide text-[#00F0FF] transition hover:bg-[#1A2552] hover:text-white">
                   Manage Videos
@@ -75,7 +75,7 @@ function AdminDashboardPage() {
           </div>
         </section>
 
-        <section className="mt-8 overflow-hidden rounded-[2rem] border border-[#1A2552] bg-[#0A102E] shadow-2xl relative">
+        <section className="relative mt-8 overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] shadow-2xl sm:rounded-[2rem]">
           <div className="border-b border-[#1A2552] bg-[#060B19]/50 px-7 py-5">
             <h2 className="text-xl font-bold font-display text-white">Manage Market News</h2>
           </div>
