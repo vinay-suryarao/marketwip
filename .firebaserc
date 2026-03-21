@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "staging": "market-wip",
+    "default": "market-wip"
+  },
+  "targets": {},
+  "etags": {}
+}

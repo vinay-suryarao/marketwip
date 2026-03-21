@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+:root {
+  --background: #060B19;
+  --foreground: #FFFFFF;
+  --surface: #0A102E;
+  --brand: #4353FF;
+  --accent: #00F0FF;
+  --muted: #8B95A5;
+  --border: #1A2552;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter);
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #060B19 0%, #0B1333 100%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.particle-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.ticker-window {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-flex;
+  gap: 2.5rem;
+  min-width: 100%;
+  animation: marketTicker 28s linear infinite;
+}
+
+@keyframes marketTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 5s ease-in-out infinite 1s;
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in-left { animation: slide-in-left 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-slide-in-right { animation: slide-in-right 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+main {
+  width: 100%;
+}

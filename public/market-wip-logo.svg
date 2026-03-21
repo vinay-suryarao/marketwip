@@ -1,0 +1,13 @@
+<svg width="420" height="120" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="420" height="120" rx="20" fill="#F7F4EE"/>
+  <rect x="18" y="18" width="74" height="58" rx="10" stroke="#25345F" stroke-width="6"/>
+  <rect x="45" y="80" width="20" height="7" rx="3.5" fill="#25345F"/>
+  <circle cx="42" cy="47" r="13" fill="#E5A52F"/>
+  <path d="M35 43H47M35 49H45M36 43.5C37 39 45 39 46 43.5" stroke="#25345F" stroke-width="2.4" stroke-linecap="round"/>
+  <rect x="56" y="50" width="6" height="14" fill="#8B85BC"/>
+  <rect x="66" y="46" width="6" height="18" fill="#9A97A8"/>
+  <rect x="76" y="42" width="6" height="22" fill="#ABB199"/>
+  <path d="M50 44L61 36L70 41L80 33L93 24" stroke="#E5A52F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M89 20L96 24L91 30" fill="#E5A52F"/>
+  <text x="110" y="72" fill="#25345F" font-family="Arial, sans-serif" font-size="44" font-weight="700">Market W.I.P</text>
+</svg>
