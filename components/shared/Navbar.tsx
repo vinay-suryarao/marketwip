@@ -40,6 +40,7 @@ const LogoComponent = ({ textClassName = "text-xl" }: { textClassName?: string }
 const links = [
   { href: "/", label: "Home" },
   { href: "/news", label: "Market News" },
+  { href: "/about", label: "About Us" },
   { href: "/videos", label: "Videos" },
 ];
 

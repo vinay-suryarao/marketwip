@@ -34,6 +34,7 @@ const LogoComponent = ({ textClassName = "text-xl" }: { textClassName?: string }
 const quickLinks = [
   { href: "/", label: "Home" },
   { href: "/news", label: "News" },
+  { href: "/about", label: "About Us" },
   { href: "/videos", label: "Videos" },
   { href: "/dashboard", label: "Dashboard" },
   { href: "/wishlist", label: "Wishlist" },
@@ -85,7 +86,10 @@ export default function Footer() {
       </section>
 
       <div className="border-t border-[#1A2552] py-6 text-center text-sm font-bold tracking-wide text-[#8B95A5]">
-        © {new Date().getFullYear()} Market W.I.P. All rights reserved.
+        <p>© {new Date().getFullYear()} Market W.I.P. All rights reserved.</p>
+        <Link href="/privacy-policy" className="mt-3 inline-block text-[#00F0FF] hover:text-white transition-colors">
+          Privacy Policy
+        </Link>
       </div>
     </footer>
   );

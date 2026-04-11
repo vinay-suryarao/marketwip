@@ -44,6 +44,11 @@ function AdminDashboardPage() {
               <p className="mt-2 text-sm text-[#8B95A5] font-medium">Manage market posts, edit updates, and keep stock feeds current.</p>
             </div>
             <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
+              <Link href="/admin/fii-dii">
+                <button className="rounded-xl border border-[#1A2552] bg-[#060B19] px-5 py-2.5 text-sm font-bold tracking-wide text-[#00F0FF] transition hover:bg-[#1A2552] hover:text-white">
+                  FII/DII Activity
+                </button>
+              </Link>
               <Link href="/admin/videos">
                 <button className="rounded-xl border border-[#1A2552] bg-[#060B19] px-5 py-2.5 text-sm font-bold tracking-wide text-[#00F0FF] transition hover:bg-[#1A2552] hover:text-white">
                   Manage Videos

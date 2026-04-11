@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import FIIDIIActivityDisplay from "@/components/shared/FIIDIIActivityDisplay";
 
 /* ═══════════════════════════════════════════════════════════
    HOOKS
@@ -326,7 +327,7 @@ export default function LandingPage() {
             <div className="pointer-events-none absolute left-[-35%] top-[62%] z-0 h-[360px] w-[360px] animate-pulse-slow rounded-full bg-[#34E0A1] opacity-20 mix-blend-screen blur-[140px] sm:left-[-20%] sm:h-[600px] sm:w-[600px] sm:blur-[180px]" style={{ animationDelay: '4s' }}></div>
 
             {/* ═══ HERO SECTION ═══ */}
-            <section className="relative z-10 mx-auto flex w-full max-w-[1300px] flex-col items-center justify-between gap-10 px-4 pb-16 pt-12 sm:gap-16 sm:px-6 sm:pb-32 sm:pt-24 lg:min-h-[90vh] lg:flex-row">
+            <section className="relative z-10 mx-auto flex w-full max-w-[1300px] flex-col items-center justify-between gap-10 px-4 pb-8 pt-12 sm:gap-16 sm:px-6 sm:pb-16 sm:pt-24 lg:min-h-[90vh] lg:flex-row">
                 
                 <div className="flex flex-col items-center text-center lg:w-1/2 lg:items-start lg:text-left">
                     <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[#00F0FF] text-[13px] font-bold tracking-widest uppercase mb-10 shadow-[0_0_20px_rgba(0,240,255,0.15)]"
@@ -335,38 +336,35 @@ export default function LandingPage() {
                         Market W.I.P Platform
                     </div>
 
-                    <div style={{ transform: `translateY(${scrollY * 0.12}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
+                            <div style={{ transform: `translateY(${scrollY * 0.12}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
                         <h1 className="mb-2 bg-gradient-to-r from-[#00F0FF] to-[#8B22FF] bg-clip-text text-5xl font-extrabold leading-tight tracking-tight text-transparent sm:text-7xl lg:text-[5rem]">
-                            Market News
+                            Market
                         </h1>
                         <h1 className="pb-2 text-5xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-[5.5rem]">
-                            Structured.
+                            Intelligence.
                         </h1>
                     </div>
 
                     <p className="mt-6 max-w-[480px] text-base font-medium leading-relaxed text-[#8B95A5] sm:text-xl"
                         style={{ transform: `translateY(${scrollY * 0.1}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
-                        Track stock-specific updates, filter by market categories, and stay aligned with important moves using our beautiful, noise-free dashboard.
+                        Track FII/DII activity, stay updated with stock-specific news, and make informed decisions with real-time market data.
                     </p>
 
-                    <div className="mt-10 flex w-full flex-col items-center gap-4 sm:mt-14 sm:w-auto sm:flex-row sm:gap-6"
+                    <div className="mt-10 w-full"
                         style={{ transform: `translateY(${scrollY * 0.06}px)`, opacity: Math.max(0, 1 - scrollY * 0.0015) }}>
-                        <Link href="/news" className="group w-full rounded-full bg-[#4353FF] px-10 py-3 text-center text-base font-bold text-white shadow-[0_0_30px_rgba(67,83,255,0.5)] transition hover:scale-105 hover:bg-[#5C6EFF] sm:w-auto sm:py-4 sm:text-lg">
-                            Get Started
-                        </Link>
-                        <Link href="#how-it-works" className="w-full rounded-full border border-white/20 bg-transparent px-10 py-3 text-center text-base font-bold text-white shadow-xl transition hover:border-white/40 hover:bg-white/5 sm:w-auto sm:py-4 sm:text-lg">
-                            How it works?
+                        <Link href="/news" className="inline-block rounded-full bg-[#4353FF] px-10 py-3 text-center text-base font-bold text-white shadow-[0_0_30px_rgba(67,83,255,0.5)] transition hover:scale-105 hover:bg-[#5C6EFF] sm:py-4 sm:text-lg">
+                            Explore News
                         </Link>
                     </div>
                 </div>
 
                 <div className="mt-6 w-full lg:mt-0 lg:w-1/2" style={{ transform: `translateY(${scrollY * 0.04}px)` }}>
-                    <HeroVisuals />
+                    <FIIDIIActivityDisplay />
                 </div>
             </section>
 
             {/* ═══ THE PROBLEM STATS ═══ */}
-            <section ref={crisisView.ref as any} className="relative z-10 mt-10 px-4 py-16 sm:mt-20 sm:px-6 sm:py-24">
+            <section ref={crisisView.ref as any} className="relative z-10 px-4 py-12 sm:px-6 sm:py-20">
                 <div className="max-w-[1200px] mx-auto">
                     <div className={`mb-12 text-center transition-all duration-1000 sm:mb-16 ${crisisView.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                         <h2 className="text-3xl font-extrabold font-display leading-tight text-white sm:text-5xl">
