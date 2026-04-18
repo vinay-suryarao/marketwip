@@ -1,5 +1,3 @@
-import IPODashboard from "@/components/shared/IPODashboard";
-
 export default function AboutPage() {
   return (
     <main className="relative mx-auto flex w-full max-w-300 flex-1 flex-col gap-6 px-4 py-8 sm:px-6 md:px-8 md:py-10">
@@ -29,8 +27,6 @@ export default function AboutPage() {
           </p>
         </article>
       </section>
-
-      <IPODashboard />
 
       <section className="rounded-2xl border border-[#f2b0b8] bg-[#fff6f8] p-6 shadow-[0_10px_22px_rgba(24,58,120,0.08)]">
         <h2 className="text-2xl font-extrabold text-[#7d2031]">Disclaimer</h2>
