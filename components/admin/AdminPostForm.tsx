@@ -95,7 +95,7 @@ export default function AdminPostForm({
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="space-y-6 rounded-[2rem] border border-[#1A2552] bg-[#060B19] p-7 shadow-lg relative z-10"
+      className="relative z-10 space-y-6 rounded-4xl border border-[#d8e2f5] bg-[#f6f9ff] p-7 shadow-lg"
     >
       <Input
         name="title"
@@ -132,7 +132,7 @@ export default function AdminPostForm({
         placeholder="News details"
         rows={9}
         required
-        className="w-full rounded-xl border border-[#1A2552] bg-[#0A102E] px-5 py-4 text-[15px] font-medium text-white placeholder:text-[#8B95A5] outline-none transition focus:border-[#00F0FF] focus:ring-4 focus:ring-[#00F0FF]/20"
+        className="w-full rounded-xl border border-[#d8e2f5] bg-[#ffffff] px-5 py-4 text-[15px] font-medium text-[#173462] placeholder:text-[#6074a0] outline-none transition focus:border-[#2e7ac9] focus:ring-4 focus:ring-[#2e7ac9]/20"
       />
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -148,7 +148,7 @@ export default function AdminPostForm({
           name="category"
           value={form.category}
           onChange={onChange}
-          className="w-full rounded-xl border border-[#1A2552] bg-[#0A102E] px-4 py-3.5 text-[15px] font-medium text-white outline-none transition focus:border-[#00F0FF]"
+          className="w-full rounded-xl border border-[#d8e2f5] bg-[#ffffff] px-4 py-3.5 text-[15px] font-medium text-[#173462] outline-none transition focus:border-[#2e7ac9]"
         >
           {NEWS_CATEGORIES.map((cat) => (
             <option key={cat.value} value={cat.value}>

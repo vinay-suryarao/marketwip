@@ -12,7 +12,7 @@ export default function LiveNewsSection({ initialCategory }: Props) {
 
   if (isLoading) {
     return (
-      <div className="rounded-2xl border border-[#1A2552] bg-[#060B19]/50 p-6 text-sm font-medium text-[#8B95A5]">
+      <div className="rounded-2xl border border-[#d8e2f5] bg-white p-6 text-sm font-medium text-[#6074a0]">
         Loading latest posts...
       </div>
     );
@@ -20,7 +20,7 @@ export default function LiveNewsSection({ initialCategory }: Props) {
 
   if (posts.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-[#1A2552] bg-[#060B19]/50 p-8 text-center text-sm font-medium text-[#8B95A5]">
+      <div className="rounded-2xl border border-dashed border-[#d8e2f5] bg-white p-8 text-center text-sm font-medium text-[#6074a0]">
         No posts yet. Create your first post from admin panel.
       </div>
     );

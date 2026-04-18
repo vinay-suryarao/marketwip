@@ -84,21 +84,21 @@ function EditPostPage() {
 
   return (
     <AdminGate>
-      <main className="mx-auto w-full max-w-[1200px] px-4 py-8 sm:px-6 md:px-8 md:py-10">
+      <main className="mx-auto w-full max-w-300 px-4 py-8 sm:px-6 md:px-8 md:py-10">
         {error ? <PromptToast message={error} tone="error" /> : null}
 
-        <div className="relative overflow-hidden rounded-2xl border border-[#1A2552] bg-[#0A102E] p-5 shadow-2xl sm:rounded-[2rem] sm:p-8">
+        <div className="relative overflow-hidden rounded-2xl border border-[#d8e2f5] bg-[#ffffff] p-5 shadow-2xl sm:rounded-4xl sm:p-8">
           {/* Subtle Glow */}
-          <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-[#00F0FF] rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-[#2e7ac9] rounded-full blur-[120px] opacity-10 pointer-events-none"></div>
 
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#1A2552] pb-5 relative z-10">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-[#d8e2f5] pb-5 relative z-10">
             <div>
-              <h1 className="text-3xl font-extrabold font-display text-white">Edit Post</h1>
-              <p className="mt-2 text-[15px] font-medium leading-relaxed text-[#8B95A5]">Update content and keep your feed accurate.</p>
+              <h1 className="text-3xl font-extrabold font-display text-[#173462]">Edit Post</h1>
+              <p className="mt-2 text-[15px] font-medium leading-relaxed text-[#6074a0]">Update content and keep your feed accurate.</p>
             </div>
             <Link
               href="/admin/dashboard"
-              className="rounded-xl border border-[#1A2552] bg-[#060B19]/50 px-5 py-2.5 text-sm font-bold tracking-wide text-[#8B95A5] transition hover:bg-[#1A2552] hover:text-white"
+              className="rounded-xl border border-[#d8e2f5] bg-[#f6f9ff]/50 px-5 py-2.5 text-sm font-bold tracking-wide text-[#6074a0] transition hover:bg-[#d8e2f5] hover:text-[#173462]"
             >
               Back to Dashboard
             </Link>
@@ -111,7 +111,7 @@ function EditPostPage() {
               submitButtonText="Update Post"
             />
           ) : (
-            <div className="py-10 text-center font-medium text-[#8B95A5]">Post data could not be loaded.</div>
+            <div className="py-10 text-center font-medium text-[#6074a0]">Post data could not be loaded.</div>
           )}
         </div>
 

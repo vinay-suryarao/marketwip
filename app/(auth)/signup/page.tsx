@@ -44,25 +44,24 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="relative mx-auto flex w-full max-w-[1200px] flex-1 items-center justify-center px-4 py-10 min-h-[70vh] sm:px-6 sm:py-20 sm:min-h-[80vh]">
-      {/* Background Neon Orbs */}
-      <div className="absolute top-[30%] left-[-10%] w-[450px] h-[450px] bg-[#C100FF] rounded-full mix-blend-screen filter blur-[150px] opacity-20 pointer-events-none z-0 animate-pulse-slow"></div>
-      <div className="absolute bottom-[-10%] right-[0%] w-[500px] h-[500px] bg-[#34E0A1] rounded-full mix-blend-screen filter blur-[150px] opacity-15 pointer-events-none z-0" style={{ animationDelay: '3s' }}></div>
+    <main className="relative mx-auto flex w-full max-w-300 flex-1 items-center justify-center px-4 py-10 min-h-[70vh] sm:px-6 sm:py-20 sm:min-h-[80vh]">
+      <div className="pointer-events-none absolute left-[-8%] top-[22%] z-0 h-95 w-95 rounded-full bg-[#8bb5ff]/24 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-[-8%] right-[-2%] z-0 h-97.5 w-97.5 rounded-full bg-[#95ddff]/24 blur-[130px]" />
 
-      <section className="relative z-10 grid w-full max-w-5xl rounded-2xl border border-[#1A2552] bg-[#0A102E]/80 p-3 shadow-[0_30px_60px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:rounded-[2.5rem] sm:p-4 md:grid-cols-2">
-        <aside className="hidden flex-col justify-center rounded-[2rem] bg-gradient-to-br from-[#C100FF] to-[#4353FF] p-10 text-white shadow-[0_0_30px_rgba(193,0,255,0.3)] md:flex">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/80 mix-blend-overlay">Market W.I.P</p>
+      <section className="relative z-10 grid w-full max-w-5xl rounded-2xl border border-[#d8e2f5] bg-white p-3 shadow-[0_16px_34px_rgba(24,58,120,0.14)] sm:rounded-[2.5rem] sm:p-4 md:grid-cols-2">
+        <aside className="hidden flex-col justify-center rounded-4xl border border-[#d5e0f5] bg-linear-to-br from-[#f6f9ff] to-[#edf3ff] p-10 text-[#173462] md:flex">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#3d74d7]">Market W.I.P</p>
           <h1 className="mt-4 text-4xl sm:text-5xl border-b border-white/20 pb-6 mb-6 font-extrabold font-display leading-tight drop-shadow-md">
             Start Your Journey
           </h1>
-          <p className="mt-auto text-lg leading-relaxed text-white/90 font-medium">
+          <p className="mt-auto text-lg font-medium leading-relaxed text-[#526894]">
             Join the platform to automatically filter noise, monitor custom watchlists, and gain the ultimate investor edge.
           </p>
         </aside>
 
         <form onSubmit={onSubmit} className="flex flex-col justify-center p-5 sm:p-8 lg:px-14">
-          <h2 className="mb-1 text-2xl font-extrabold font-display text-white sm:text-3xl">Register</h2>
-          <p className="mb-6 text-[14px] font-medium text-[#8B95A5] sm:mb-8 sm:text-[15px]">Setup your account in seconds.</p>
+          <h2 className="mb-1 text-2xl font-extrabold font-display text-[#173462] sm:text-3xl">Register</h2>
+          <p className="mb-6 text-[14px] font-medium text-[#6074a0] sm:mb-8 sm:text-[15px]">Setup your account in seconds.</p>
 
           <div className="space-y-4 mb-8">
             <Input
@@ -92,9 +91,9 @@ export default function SignupPage() {
             {isSubmitting ? "Registering..." : "Register"}
           </Button>
 
-          <p className="mt-8 text-center text-[15px] font-medium text-[#8B95A5]">
+          <p className="mt-8 text-center text-[15px] font-medium text-[#6074a0]">
             Already registered?{" "}
-            <Link href="/login" className="font-bold text-[#C100FF] hover:text-[#00F0FF] transition-colors hover:underline">
+            <Link href="/login" className="font-bold text-[#2e7ac9] transition-colors hover:text-[#173462] hover:underline">
               Login
             </Link>
           </p>

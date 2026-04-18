@@ -38,11 +38,11 @@ export default function NewsCatalog({ posts, initialCategory = ALL_CATEGORIES }:
 
   return (
     <section className="space-y-6">
-      <div className="rounded-[2rem] border border-[#1A2552] bg-[#0A102E] p-6 shadow-2xl">
+      <div className="rounded-2xl border border-[#d8e2f5] bg-white p-6 shadow-[0_10px_24px_rgba(24,58,120,0.1)]">
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          className="w-full rounded-xl border border-[#1A2552] bg-[#060B19] px-5 py-3.5 text-[15px] font-medium text-white placeholder:text-[#8B95A5] outline-none hover:border-[#4353FF]/50 ring-[#00F0FF]/20 transition focus:ring-4 focus:border-[#00F0FF]"
+          className="w-full rounded-lg border border-[#cfdbf3] bg-white px-5 py-3.5 text-[15px] font-medium text-[#16305f] placeholder:text-[#8599c1] outline-none ring-[#71d6ff]/20 transition hover:border-[#b5c7ee] focus:border-[#71d6ff] focus:ring-4"
           placeholder="Search by title, content or stock tag"
           aria-label="Search news"
         />
@@ -52,8 +52,8 @@ export default function NewsCatalog({ posts, initialCategory = ALL_CATEGORIES }:
             type="button"
             className={`rounded-full px-5 py-2 text-xs font-bold tracking-wide transition ${
               activeCategory === ALL_CATEGORIES
-                ? "bg-[#4353FF] text-white shadow-[0_0_15px_rgba(67,83,255,0.4)] border border-[#4353FF]"
-                : "bg-[#1A2552] text-[#8B95A5] border border-[#1A2552] hover:bg-[#1A2552]/80 hover:text-white"
+                ? "border border-[#f0c659] bg-[#e9b742] text-[#13204a]"
+                : "border border-[#d3def4] bg-[#f6f9ff] text-[#33568f] hover:bg-[#edf3ff]"
             }`}
           >
             All News
@@ -65,8 +65,8 @@ export default function NewsCatalog({ posts, initialCategory = ALL_CATEGORIES }:
               type="button"
               className={`rounded-full px-5 py-2 text-xs font-bold tracking-wide transition ${
                 activeCategory === category.value
-                  ? "bg-[#4353FF] text-white shadow-[0_0_15px_rgba(67,83,255,0.4)] border border-[#4353FF]"
-                  : "bg-[#1A2552] text-[#8B95A5] border border-[#1A2552] hover:bg-[#1A2552]/80 hover:text-white"
+                  ? "border border-[#f0c659] bg-[#e9b742] text-[#13204a]"
+                  : "border border-[#d3def4] bg-[#f6f9ff] text-[#33568f] hover:bg-[#edf3ff]"
               }`}
             >
               {category.label}
@@ -76,7 +76,7 @@ export default function NewsCatalog({ posts, initialCategory = ALL_CATEGORIES }:
       </div>
 
       {filteredPosts.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[#1A2552] bg-[#0A102E] p-8 text-center text-sm font-medium text-[#8B95A5]">
+        <div className="rounded-2xl border border-dashed border-[#d8e2f5] bg-white p-8 text-center text-sm font-medium text-[#6074a0]">
           No news found for selected filters.
         </div>
       ) : (

@@ -19,15 +19,15 @@ export default function ParticleBackground() {
   const animFrame = useRef(0);
 
   const init = useCallback(() => {
-    const count = window.innerWidth < 768 ? 40 : 80;
-    const colors = ["#00F0FF", "#C100FF", "#34E0A1", "#FF5B79"];
+    const count = window.innerWidth < 768 ? 28 : 52;
+    const colors = ["#67baff", "#3f8efc", "#8fdfff"];
     particles.current = Array.from({ length: count }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       vx: (Math.random() - 0.5) * 0.3,
       vy: (Math.random() - 0.5) * 0.3,
-      size: Math.random() * 1.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.5,
+      size: Math.random() * 1.2 + 0.4,
+      opacity: Math.random() * 0.35 + 0.22,
       color: colors[Math.floor(Math.random() * colors.length)],
     }));
   }, []);
@@ -60,7 +60,7 @@ export default function ParticleBackground() {
         const dx = p.x - mouse.current.x;
         const dy = p.y - mouse.current.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
+        if (dist < 80) {
           p.vx += (dx / dist) * 0.05;
           p.vy += (dy / dist) * 0.05;
         }
@@ -88,12 +88,12 @@ export default function ParticleBackground() {
         for (let j = i + 1; j < pts.length; j++) {
           const p2 = pts[j];
           const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (d < 150) {
+          if (d < 130) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(232, 125, 32, ${0.25 * (1 - d / 150)})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(122, 172, 255, ${0.16 * (1 - d / 130)})`;
+            ctx.lineWidth = 0.7;
             ctx.stroke();
           }
         }

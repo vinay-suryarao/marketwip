@@ -21,10 +21,10 @@ export default function WishlistManager() {
   };
 
   return (
-    <section className="space-y-5 rounded-3xl border border-[#1A2552] bg-[#060B19]/50 backdrop-blur-md p-6 shadow-2xl">
-      <div className="flex items-center justify-between border-b border-[#1A2552] pb-4">
-        <h3 className="text-lg font-bold font-display text-white">Manage Watchlist Tags</h3>
-        <span className="rounded-full bg-[#4353FF] px-3 py-1 text-xs font-bold text-white shadow-[0_0_10px_rgba(67,83,255,0.3)]">
+    <section className="space-y-5 rounded-3xl border border-[#d8e2f5] bg-white p-6 shadow-[0_10px_24px_rgba(24,58,120,0.1)]">
+      <div className="flex items-center justify-between border-b border-[#d8e2f5] pb-4">
+        <h3 className="text-lg font-bold font-display text-[#173462]">Manage Watchlist Tags</h3>
+        <span className="rounded-full border border-[#bfd1f1] bg-[#f4f8ff] px-3 py-1 text-xs font-bold text-[#2e7ac9]">
           {wishlist.length} tags
         </span>
       </div>
@@ -41,14 +41,14 @@ export default function WishlistManager() {
         </Button>
       </form>
 
-      {!user ? <p className="text-sm font-medium text-[#8B95A5]">Login required to manage wishlist.</p> : null}
+      {!user ? <p className="text-sm font-medium text-[#6074a0]">Login required to manage wishlist.</p> : null}
 
       <div className="flex flex-wrap gap-2">
         {wishlist.map((tag) => (
           <button
             key={tag}
             onClick={() => removeTag(tag)}
-            className="rounded-full border border-[#1A2552] bg-[#0A102E] px-4 py-1.5 text-xs font-bold tracking-wide text-[#00F0FF] transition hover:bg-[#FF5B79]/20 hover:text-[#FF5B79] hover:border-[#FF5B79]/30"
+            className="rounded-full border border-[#cddaf3] bg-[#f4f8ff] px-4 py-1.5 text-xs font-bold tracking-wide text-[#2e7ac9] transition hover:border-[#f2b0b8] hover:bg-[#fff2f4] hover:text-[#b13a4f]"
             type="button"
             disabled={isLoading}
           >

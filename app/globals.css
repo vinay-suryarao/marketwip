@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #060B19;
-  --foreground: #FFFFFF;
-  --surface: #0A102E;
-  --brand: #4353FF;
-  --accent: #00F0FF;
-  --muted: #8B95A5;
-  --border: #1A2552;
+  --background: #f6f9ff;
+  --foreground: #14234f;
+  --surface: #ffffff;
+  --surface-soft: #eef3ff;
+  --brand: #1f66ff;
+  --accent: #37c8ff;
+  --muted: #6074a0;
+  --border: #d8e2f5;
+  --gold: #f4c451;
 }
 
 @theme inline {
@@ -24,12 +26,51 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #060B19 0%, #0B1333 100%);
+  background:
+    radial-gradient(980px 420px at 6% -6%, rgba(126, 173, 255, 0.22) 0%, rgba(126, 173, 255, 0) 64%),
+    radial-gradient(860px 360px at 96% 3%, rgba(149, 223, 255, 0.2) 0%, rgba(149, 223, 255, 0) 66%),
+    linear-gradient(180deg, #f9fbff 0%, #eef3fb 58%, #f7fbff 100%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
   position: relative;
   overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(125, 159, 222, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 159, 222, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.45), transparent 92%);
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-radial-gradient(
+      1200px 430px at -6% 50%,
+      rgba(121, 167, 245, 0.11) 0,
+      rgba(121, 167, 245, 0.11) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    repeating-radial-gradient(
+      1100px 400px at 106% 52%,
+      rgba(121, 167, 245, 0.09) 0,
+      rgba(121, 167, 245, 0.09) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  opacity: 0.65;
+  z-index: 0;
 }
 
 .particle-layer {
@@ -45,14 +86,32 @@ body {
   white-space: nowrap;
 }
 
-.ticker-track {
-  display: inline-flex;
-  gap: 2.5rem;
-  min-width: 100%;
-  animation: marketTicker 28s linear infinite;
+.ticker-marquee {
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-@keyframes marketTicker {
+.ticker-track {
+  display: inline-flex;
+  gap: 0;
+  width: max-content;
+}
+
+.ticker-track-loop {
+  animation: marketTickerLoop 120s linear infinite;
+}
+
+.ticker-segment {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-width: 100%;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  line-height: 1;
+  font-size: 10px;
+}
+
+@keyframes marketTickerLoop {
   0% {
     transform: translateX(0);
   }
