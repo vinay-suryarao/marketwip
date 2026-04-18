@@ -11,19 +11,27 @@ type TickerItem = {
 
 export default function LiveMarketTicker() {
   const [items, setItems] = useState<TickerItem[]>([]);
+  const [lastUpdated, setLastUpdated] = useState<string>("--:--:--");
 
   useEffect(() => {
     let isMounted = true;
 
     const loadTicker = async () => {
       try {
-        const response = await fetch("/api/market-ticker", { cache: "no-store" });
+        const response = await fetch(`/api/market-ticker?t=${Date.now()}`, {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+          },
+        });
         if (!response.ok) {
           return;
         }
-        const data = (await response.json()) as { items: TickerItem[] };
+        const data = (await response.json()) as { items: TickerItem[]; serverTime?: string };
         if (isMounted && Array.isArray(data.items) && data.items.length > 0) {
           setItems(data.items);
+          const time = data.serverTime ? new Date(data.serverTime) : new Date();
+          setLastUpdated(time.toLocaleTimeString("en-IN", { hour12: false }));
         }
       } catch {
         // Keep previous values if one polling call fails.
@@ -31,7 +39,7 @@ export default function LiveMarketTicker() {
     };
 
     loadTicker();
-    const intervalId = window.setInterval(loadTicker, 10000);
+    const intervalId = window.setInterval(loadTicker, 5000);
 
     return () => {
       isMounted = false;
@@ -70,6 +78,7 @@ export default function LiveMarketTicker() {
           </div>
         ))}
       </div>
+      <span className="sr-only">Last updated {lastUpdated}</span>
     </div>
   );
 }
