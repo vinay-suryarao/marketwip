@@ -38,8 +38,8 @@ function getSignedValueColorClass(value: string) {
 }
 
 function renderMetricRow(label: string, row: CompanyResultRecord["sales"]) {
-  const trendCellClass = label === "Sales" ? getSignedValueColorClass(row.yoy) : "text-black";
-  const momentumCellClass = label === "Sales" ? getSignedValueColorClass(row.qoq) : "text-black";
+  const trendCellClass = getSignedValueColorClass(row.yoy);
+  const momentumCellClass = getSignedValueColorClass(row.qoq);
 
   return (
     <tr>
