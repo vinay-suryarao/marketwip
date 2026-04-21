@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FIIDIIActivityDisplay from "@/components/shared/FIIDIIActivityDisplay";
+import EconomicMapWidget from "@/components/shared/EconomicMapWidget";
 import { NEWS_CATEGORIES } from "@/constants/newsCategories";
 
 const categoryCardMeta: Record<
@@ -223,6 +224,11 @@ export default function HomePage() {
           </p>
         </div>
         <FIIDIIActivityDisplay />
+
+        <div className="mt-6 overflow-hidden rounded-xl border border-[#deebff] bg-[#fbfdff] p-3 sm:p-4">
+          <h3 className="mb-3 text-base font-extrabold text-[#173462] sm:text-lg">Economic Map</h3>
+          <EconomicMapWidget />
+        </div>
       </section>
     </main>
   );

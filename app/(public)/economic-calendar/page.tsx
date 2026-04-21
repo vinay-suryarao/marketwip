@@ -1,5 +1,4 @@
 import EconomicCalendarWidget from "@/components/shared/EconomicCalendarWidget";
-import EconomicMapWidget from "@/components/shared/EconomicMapWidget";
 
 export default function EconomicCalendarPage() {
   return (
@@ -18,11 +17,6 @@ export default function EconomicCalendarPage() {
         <div className="overflow-hidden rounded-xl border border-[#deebff] bg-[#fbfdff] p-3 sm:p-4">
           <h2 className="mb-3 text-base font-extrabold text-[#173462] sm:text-lg">Economic Calendar</h2>
           <EconomicCalendarWidget />
-        </div>
-
-        <div className="overflow-hidden rounded-xl border border-[#deebff] bg-[#fbfdff] p-3 sm:p-4">
-          <h2 className="mb-3 text-base font-extrabold text-[#173462] sm:text-lg">Economic Map</h2>
-          <EconomicMapWidget />
         </div>
       </section>
     </main>

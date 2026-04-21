@@ -10,11 +10,11 @@ import LiveMarketTicker from "@/components/shared/LiveMarketTicker";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/economic-calendar", label: "Economic Calendar" },
   { href: "/news", label: "News" },
-  { href: "/results", label: "Result" },
   { href: "/ipo-dashboard", label: "IPO Dashboard" },
+  { href: "/results", label: "Results" },
+  { href: "/economic-calendar", label: "Economic Calendar" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Navbar() {

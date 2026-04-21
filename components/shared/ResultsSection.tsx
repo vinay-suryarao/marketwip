@@ -11,12 +11,41 @@ function bodyCellClass() {
   return "border border-[#212121] px-2 py-1 text-sm text-black";
 }
 
+function getSignedValueColorClass(value: string) {
+  const normalized = value.trim();
+  if (!normalized) {
+    return "text-black";
+  }
+
+  const isBracketNegative = normalized.startsWith("(") && normalized.endsWith(")");
+  const numeric = Number.parseFloat(normalized.replace(/[^\d+\-.]/g, ""));
+
+  if (!Number.isFinite(numeric)) {
+    return "text-black";
+  }
+
+  const signedNumeric = isBracketNegative ? -Math.abs(numeric) : numeric;
+
+  if (signedNumeric < 0) {
+    return "text-red-600";
+  }
+
+  if (signedNumeric > 0) {
+    return "text-green-600";
+  }
+
+  return "text-black";
+}
+
 function renderMetricRow(label: string, row: CompanyResultRecord["sales"]) {
+  const trendCellClass = label === "Sales" ? getSignedValueColorClass(row.yoy) : "text-black";
+  const momentumCellClass = label === "Sales" ? getSignedValueColorClass(row.qoq) : "text-black";
+
   return (
     <tr>
       <th className={`${headingCellClass()} w-[130px]`}>{label}</th>
-      <td className={bodyCellClass()}>{row.yoy}</td>
-      <td className={bodyCellClass()}>{row.qoq}</td>
+      <td className={`${bodyCellClass()} ${trendCellClass}`}>{row.yoy}</td>
+      <td className={`${bodyCellClass()} ${momentumCellClass}`}>{row.qoq}</td>
       <td className={bodyCellClass()}>{row.month1}</td>
       <td className={bodyCellClass()}>{row.month2}</td>
       <td className={bodyCellClass()}>{row.month3}</td>
