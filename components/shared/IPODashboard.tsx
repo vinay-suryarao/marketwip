@@ -21,9 +21,9 @@ function formatDisplayDate(value?: string) {
 }
 
 export default function IPODashboard() {
-  const { latest, isLoading } = useIPODashboard();
+  const { activeUpcoming, recentIpos, lastUpdatedAt, isLoading } = useIPODashboard();
 
-  const updatedOn = useMemo(() => formatDisplayDate(latest?.updatedAt), [latest?.updatedAt]);
+  const updatedOn = useMemo(() => formatDisplayDate(lastUpdatedAt ?? undefined), [lastUpdatedAt]);
 
   if (isLoading) {
     return (
@@ -33,7 +33,7 @@ export default function IPODashboard() {
     );
   }
 
-  if (!latest || (latest.activeUpcoming.length === 0 && latest.recentIpos.length === 0)) {
+  if (activeUpcoming.length === 0 && recentIpos.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#d8e2f5] bg-white p-8 text-center text-sm font-medium text-[#6074a0]">
         IPO dashboard will appear here once admin publishes data.
@@ -78,8 +78,8 @@ export default function IPODashboard() {
               </tr>
             </thead>
             <tbody>
-              {latest.activeUpcoming.length > 0 ? (
-                latest.activeUpcoming.map((row, index) => (
+              {activeUpcoming.length > 0 ? (
+                activeUpcoming.map((row, index) => (
                   <tr key={`${row.ipoName}-${index}`} className="border-b border-[#e4ecfb] text-[#173462] odd:bg-white even:bg-[#fcfdff]">
                     <td className="px-3 py-2 font-semibold">{row.ipoName}</td>
                     <td className="px-3 py-2">{row.priceBand}</td>
@@ -128,8 +128,8 @@ export default function IPODashboard() {
               </tr>
             </thead>
             <tbody>
-              {latest.recentIpos.length > 0 ? (
-                latest.recentIpos.map((row, index) => (
+              {recentIpos.length > 0 ? (
+                recentIpos.map((row, index) => (
                   <tr key={`${row.ipoName}-${index}`} className="border-b border-[#e4ecfb] text-[#173462] odd:bg-white even:bg-[#fcfdff]">
                     <td className="px-3 py-2 font-semibold">{row.ipoName}</td>
                     <td className="px-3 py-2">{row.priceBand}</td>

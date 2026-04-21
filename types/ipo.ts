@@ -30,14 +30,20 @@ export type RecentIPORow = {
   preIpoLockIn: string;
 };
 
-export type IPODashboardSnapshot = {
+export type ActiveUpcomingIPORecord = ActiveUpcomingIPORow & {
   id: string;
+  createdAt: string;
   updatedAt: string;
-  activeUpcoming: ActiveUpcomingIPORow[];
-  recentIpos: RecentIPORow[];
 };
 
-export type IPODashboardInput = {
-  activeUpcoming: ActiveUpcomingIPORow[];
-  recentIpos: RecentIPORow[];
+export type RecentIPORecord = RecentIPORow & {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type IPODashboardData = {
+  activeUpcoming: ActiveUpcomingIPORecord[];
+  recentIpos: RecentIPORecord[];
+  lastUpdatedAt: string | null;
 };

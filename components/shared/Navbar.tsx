@@ -10,9 +10,10 @@ import LiveMarketTicker from "@/components/shared/LiveMarketTicker";
 
 const links = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/economic-calendar", label: "Economic Calendar" },
   { href: "/news", label: "News" },
-  { href: "/about", label: "About" },
+  { href: "/results", label: "Result" },
   { href: "/ipo-dashboard", label: "IPO Dashboard" },
 ];
 
@@ -39,7 +40,7 @@ export default function Navbar() {
             <BrandLogo className="h-12 w-12 object-cover scale-225" textClassName="text-2xl sm:text-3xl" priority />
           </Link>
 
-          <ul className="hidden flex-1 items-center gap-1 md:flex lg:gap-2">
+          <ul className="hidden flex-1 items-center justify-center gap-1 md:flex lg:gap-2">
             {navLinks.map((link) => {
               const active =
                 link.href === "/"

@@ -115,7 +115,14 @@ function CategoryIcon({ type }: { type: "doc" | "briefcase" | "trend" | "factory
 export default function HomePage() {
   return (
     <main className="mx-auto flex w-full max-w-300 flex-1 flex-col gap-8 px-4 py-8 sm:px-6 md:px-8 md:py-10">
-      <section className="rounded-3xl border border-[#d8e2f5] bg-white px-5 py-8 shadow-[0_16px_34px_rgba(24,58,120,0.12)] sm:px-9 sm:py-10">
+      <section className="relative overflow-hidden rounded-3xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f3f8ff] px-5 py-8 shadow-[0_16px_34px_rgba(24,58,120,0.12)] sm:px-9 sm:py-10">
+        <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-[#9bc2ff]/25 blur-[90px]" />
+        <div className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-[#9de2ff]/24 blur-[100px]" />
+
+        <div className="relative z-10 mx-auto mb-5 inline-flex items-center gap-2 rounded-full border border-[#cddcf6] bg-[#ffffff]/85 px-4 py-2 text-xs font-bold tracking-[0.12em] text-[#305ea3] sm:text-sm">
+          LIVE MARKET COVERAGE
+        </div>
+
         <h1 className="mx-auto max-w-4xl text-center font-display text-4xl font-extrabold leading-tight text-[#132746] sm:text-6xl sm:leading-[1.1]">
           Latest Indian stock market news and updates
         </h1>
@@ -139,16 +146,43 @@ export default function HomePage() {
               name="q"
               type="search"
               placeholder="Search for companies and stocks to analyse"
-              className="h-14 w-full rounded-xl border border-[#d8e2f5] bg-[#ffffff] pl-12 pr-4 text-[15px] font-medium text-[#173462] outline-none transition placeholder:text-[#8da0c4] focus:border-[#2e7ac9] focus:ring-4 focus:ring-[#2e7ac9]/15"
+              className="h-14 w-full rounded-xl border border-[#cbdcf7] bg-[#ffffff] pl-12 pr-4 text-[15px] font-medium text-[#173462] outline-none transition placeholder:text-[#8da0c4] focus:border-[#2e7ac9] focus:ring-4 focus:ring-[#2e7ac9]/15"
             />
           </div>
         </form>
 
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+          <Link href="/news" className="rounded-full border border-[#cddcf6] bg-[#ffffff] px-4 py-2 text-xs font-bold text-[#2e7ac9] transition hover:bg-[#f1f7ff] sm:text-sm">
+            Explore News
+          </Link>
+          <Link href="/results" className="rounded-full border border-[#cddcf6] bg-[#ffffff] px-4 py-2 text-xs font-bold text-[#2e7ac9] transition hover:bg-[#f1f7ff] sm:text-sm">
+            Company Results
+          </Link>
+          <Link href="/economic-calendar" className="rounded-full border border-[#cddcf6] bg-[#ffffff] px-4 py-2 text-xs font-bold text-[#2e7ac9] transition hover:bg-[#f1f7ff] sm:text-sm">
+            Economic Calendar
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="rounded-2xl border border-[#d7e4fb] bg-[#ffffff]/90 p-4 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#6074a0]">Coverage</p>
+            <p className="mt-1 text-xl font-extrabold text-[#173462]">{NEWS_CATEGORIES.length} Categories</p>
+          </div>
+          <div className="rounded-2xl border border-[#d7e4fb] bg-[#ffffff]/90 p-4 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#6074a0]">Focus</p>
+            <p className="mt-1 text-xl font-extrabold text-[#173462]">Results + Flows</p>
+          </div>
+          <div className="rounded-2xl border border-[#d7e4fb] bg-[#ffffff]/90 p-4 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#6074a0]">Updates</p>
+            <p className="mt-1 text-xl font-extrabold text-[#173462]">Realtime Widgets</p>
+          </div>
+        </div>
       </section>
 
-      <section className="rounded-3xl border border-[#d8e2f5] bg-white p-5 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-7">
+      <section className="rounded-3xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f8fbff] p-5 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-7">
         <div className="mb-5 border-b border-[#d8e2f5] pb-4">
-          <h2 className="text-2xl font-extrabold text-[#173462] sm:text-3xl">Browse by category</h2>
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f77a5]">Market Discovery</p>
+          <h2 className="mt-1 text-2xl font-extrabold text-[#173462] sm:text-3xl">Browse by category</h2>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -159,7 +193,7 @@ export default function HomePage() {
               <Link
                 key={category.value}
                 href={`/news/category/${category.value}`}
-                className="group rounded-2xl border border-[#d8e2f5] bg-[#fbfdff] p-5 shadow-[0_8px_20px_rgba(20,58,120,0.07)] transition hover:-translate-y-0.5 hover:border-[#c7d8f7] hover:shadow-[0_14px_26px_rgba(20,58,120,0.12)]"
+                className="group rounded-2xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f9fcff] p-5 shadow-[0_8px_20px_rgba(20,58,120,0.07)] transition hover:-translate-y-0.5 hover:border-[#c7d8f7] hover:shadow-[0_14px_26px_rgba(20,58,120,0.12)]"
               >
                 <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${meta.iconBg} ${meta.iconColor}`}>
                   <CategoryIcon type={meta.iconType} />
@@ -180,8 +214,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-[#d8e2f5] bg-white p-6 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-8">
+      <section className="rounded-3xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f7fbff] p-6 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-8">
         <div className="mb-5 border-b border-[#d8e2f5] pb-4">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f77a5]">Liquidity Pulse</p>
           <h2 className="text-2xl font-extrabold text-[#173462] sm:text-3xl">FII / DII Activity Snapshot</h2>
           <p className="mt-2 text-sm text-[#6074a0]">
             Live market cash flow view for quick daily context.
