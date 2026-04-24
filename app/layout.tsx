@@ -28,8 +28,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -42,10 +41,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex w-full flex-col overflow-x-hidden bg-background text-foreground">
+      <body className="min-h-full flex w-full flex-col bg-background text-foreground">
         <ViewportGuard />
         <ParticleBackground />
-        <div className="relative z-10 flex min-h-full w-full flex-col overflow-x-hidden">
+        <div className="relative z-10 flex min-h-full w-full flex-col">
           <Navbar />
           {children}
           <Footer />
