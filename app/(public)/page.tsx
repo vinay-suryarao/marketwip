@@ -115,7 +115,7 @@ function CategoryIcon({ type }: { type: "doc" | "briefcase" | "trend" | "factory
 
 export default function HomePage() {
   return (
-    <main className="mx-auto flex w-full max-w-300 flex-1 flex-col gap-8 px-4 py-8 sm:px-6 md:px-8 md:py-10">
+    <main className="mx-auto flex w-full max-w-full flex-1 flex-col gap-8 overflow-x-hidden px-4 py-8 sm:px-6 md:max-w-300 md:px-8 md:py-10">
       <section className="relative overflow-hidden rounded-3xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f3f8ff] px-5 py-8 shadow-[0_16px_34px_rgba(24,58,120,0.12)] sm:px-9 sm:py-10">
         <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-[#9bc2ff]/25 blur-[90px]" />
         <div className="pointer-events-none absolute -bottom-24 -right-20 h-64 w-64 rounded-full bg-[#9de2ff]/24 blur-[100px]" />

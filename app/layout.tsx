@@ -43,7 +43,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex w-full flex-col overflow-x-hidden bg-background text-foreground">
         <ParticleBackground />
-        <div className="relative z-10 flex min-h-full flex-col">
+        <div className="relative z-10 flex min-h-full w-full flex-col overflow-x-hidden">
           <Navbar />
           {children}
           <Footer />
