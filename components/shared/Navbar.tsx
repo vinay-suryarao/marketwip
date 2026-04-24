@@ -34,12 +34,12 @@ export default function Navbar() {
         <LiveMarketTicker />
       </div>
 
-      <nav className="mx-auto w-full max-w-full px-4 py-3 md:max-w-310 md:px-8">
-        <div className="flex items-center gap-4 md:gap-5">
-          <Link href="/" className="shrink-0">
+      <nav className="mx-auto w-full max-w-full overflow-x-hidden px-4 py-3 md:max-w-310 md:px-8">
+        <div className="flex min-w-0 items-center gap-3 md:gap-5">
+          <Link href="/" className="min-w-0 flex-1 md:flex-none">
             <BrandLogo
               className="h-10 w-10 object-cover sm:h-12 sm:w-12 sm:scale-225"
-              textClassName="text-xl sm:text-3xl"
+              textClassName="hidden truncate text-xl sm:inline sm:text-3xl"
               priority
             />
           </Link>
@@ -109,7 +109,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#3a518f] bg-[#13255c] text-white transition hover:bg-[#1a3172] md:hidden"
+            className="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#3a518f] bg-[#13255c] text-white transition hover:bg-[#1a3172] md:hidden"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle menu"
           >
