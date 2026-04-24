@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import ParticleBackground from "@/components/shared/ParticleBackground";
+import ViewportGuard from "@/components/shared/ViewportGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,6 +43,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex w-full flex-col overflow-x-hidden bg-background text-foreground">
+        <ViewportGuard />
         <ParticleBackground />
         <div className="relative z-10 flex min-h-full w-full flex-col overflow-x-hidden">
           <Navbar />
