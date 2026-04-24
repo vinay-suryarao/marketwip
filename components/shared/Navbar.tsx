@@ -38,8 +38,8 @@ export default function Navbar() {
         <div className="flex min-w-0 items-center gap-3 md:gap-5">
           <Link href="/" className="min-w-0 flex-1 md:flex-none">
             <BrandLogo
-              className="h-10 w-10 object-cover sm:h-12 sm:w-12 sm:scale-225"
-              textClassName="hidden truncate text-xl sm:inline sm:text-3xl"
+              className="h-11 w-11 object-cover sm:h-12 sm:w-12 sm:scale-225"
+              textClassName="inline-block max-w-[9.5rem] truncate text-lg sm:max-w-none sm:text-3xl"
               priority
             />
           </Link>
