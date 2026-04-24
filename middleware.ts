@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
 
 export function middleware() {
-  return NextResponse.next();
+  const response = NextResponse.next();
+
+  // Ensure clients always revalidate page responses so stale mobile layout is not served from cache.
+  response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0");
+  response.headers.set("Pragma", "no-cache");
+  response.headers.set("Expires", "0");
+
+  return response;
 }
 
 export const config = {
-  matcher: [],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };
