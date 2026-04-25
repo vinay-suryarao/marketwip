@@ -29,17 +29,17 @@ export default function Navbar() {
       : links;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#2a3f7a] bg-[#0d1a47]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#2a3f7a] bg-[#0d1a47]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
       <div className="ticker-window border-b border-[#2a3f7a] bg-[#101f50] px-2.5 py-1.5 text-[10px] font-medium tracking-[0.09em] text-[#8fd9ff]">
         <LiveMarketTicker />
       </div>
 
-      <nav className="mx-auto w-full max-w-full overflow-x-hidden px-4 py-3 md:max-w-310 md:px-8">
+      <nav className="mx-auto w-full max-w-300 overflow-hidden px-4 py-3 sm:px-5 md:px-8">
         <div className="flex min-w-0 items-center gap-3 md:gap-5">
           <Link href="/" className="min-w-0 flex-1 md:flex-none">
             <BrandLogo
-              className="h-11 w-11 object-cover sm:h-12 sm:w-12 sm:scale-225"
-              textClassName="inline-block max-w-[9.5rem] truncate text-lg sm:max-w-none sm:text-3xl"
+              className="h-10 w-10 object-cover sm:h-11 sm:w-11"
+              textClassName="inline-block max-w-[9.75rem] truncate text-lg sm:max-w-none sm:text-3xl"
               priority
             />
           </Link>
@@ -118,7 +118,7 @@ export default function Navbar() {
         </div>
 
         {isMobileMenuOpen ? (
-          <div className="mt-3 rounded-xl border border-[#2a3f7a] bg-[#101f50] p-3 md:hidden">
+          <div className="mt-3 w-full rounded-xl border border-[#2a3f7a] bg-[#101f50] p-3 md:hidden">
             <ul className="space-y-1.5">
               {navLinks.map((link) => {
                 const active =
