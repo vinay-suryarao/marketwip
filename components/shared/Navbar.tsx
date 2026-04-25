@@ -54,7 +54,7 @@ export default function Navbar() {
               return (
                 <li key={link.href}>
                   <Link
-                    className={`rounded-lg px-3 py-2 text-sm font-semibold transition lg:px-3.5 ${
+                    className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition lg:px-3.5 ${
                       active
                         ? "bg-[#1a3172] text-[#8fe1ff]"
                         : "text-[#d8e4ff] hover:bg-[#142a63] hover:text-white"
