@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Script from "next/script";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOutUser } from "@/lib/firebase/auth";
@@ -30,6 +31,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#2a3f7a] bg-[#0d1a47]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-93RL5XKD6E"
+        strategy="afterInteractive"
+      />
       <div className="ticker-window border-b border-[#2a3f7a] bg-[#101f50] px-2.5 py-1.5 text-[10px] font-medium tracking-[0.09em] text-[#8fd9ff]">
         <LiveMarketTicker />
       </div>
