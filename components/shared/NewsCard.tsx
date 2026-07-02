@@ -42,7 +42,7 @@ export default function NewsCard({ post }: Props) {
         <span>{formatDate(post.createdAt)}</span>
         <div className="flex items-center gap-2.5">
           <CardShareButton
-            url={`${process.env.NEXT_PUBLIC_SITE_URL || "https://marketwip.vercel.app"}/news/${post.slug}`}
+            url={`${process.env.NEXT_PUBLIC_SITE_URL || "https://marketwip.com"}/news/${post.slug}`}
             title={post.title}
           />
           <Link href={`/news/${post.slug}`} className="font-bold text-[#2e7ac9] transition hover:text-[#173462]">

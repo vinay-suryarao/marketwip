@@ -60,7 +60,7 @@ export default async function NewsDetailsPage({ params }: Props) {
     notFound();
   }
 
-  const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://marketwip.vercel.app"}/news/${post.slug}`;
+  const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://marketwip.com"}/news/${post.slug}`;
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-10">
