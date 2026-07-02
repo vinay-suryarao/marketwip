@@ -1,8 +1,2 @@
 {
-  "rewrites": [
-    {
-      "source": "/((?!api|_next|.*\\..*).*)",
-      "destination": "/"
-    }
-  ]
 }
