@@ -4,6 +4,7 @@ import type { NewsPost } from "@/types/post";
 import { formatDate } from "@/lib/helpers/dateFormat";
 import Card from "@/components/ui/Card";
 import { getCategoryLabel } from "@/constants/newsCategories";
+import CardShareButton from "@/components/shared/CardShareButton";
 
 type Props = {
   post: NewsPost;
@@ -39,9 +40,15 @@ export default function NewsCard({ post }: Props) {
 
       <div className="mt-6 flex items-center justify-between border-t border-[#d8e2f5] pt-4 text-xs font-medium text-[#6074a0]">
         <span>{formatDate(post.createdAt)}</span>
-        <Link href={`/news/${post.slug}`} className="font-bold text-[#2e7ac9] transition hover:text-[#173462]">
-          Read more →
-        </Link>
+        <div className="flex items-center gap-2.5">
+          <CardShareButton
+            url={`${process.env.NEXT_PUBLIC_SITE_URL || "https://marketwip.vercel.app"}/news/${post.slug}`}
+            title={post.title}
+          />
+          <Link href={`/news/${post.slug}`} className="font-bold text-[#2e7ac9] transition hover:text-[#173462]">
+            Read more →
+          </Link>
+        </div>
       </div>
     </Card>
   );
