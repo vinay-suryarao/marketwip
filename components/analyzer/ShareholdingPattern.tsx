@@ -1,11 +1,4 @@
-type ShareholdingEntry = { holdingDate?: string; percentage?: string | number };
-type ShareholdingCategory = {
-  categoryName?: string;
-  displayName?: string;
-  categories?: ShareholdingEntry[];
-};
-
-type Props = { shareholding?: ShareholdingCategory[] };
+type Props = { shareholding?: any[] };
 
 export default function ShareholdingPattern({ shareholding }: Props) {
   if (!shareholding || shareholding.length === 0) return null;
@@ -30,7 +23,7 @@ export default function ShareholdingPattern({ shareholding }: Props) {
                   <table className="w-full min-w-[300px] text-left text-sm">
                     <thead>
                       <tr className="border-b border-[#d8e2f5]">
-                        {entries.map((entry, eIdx) => (
+                        {entries.map((entry: any, eIdx: number) => (
                           <th key={eIdx} className="whitespace-nowrap px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#6074a0]">
                             {entry.holdingDate || `Period ${eIdx + 1}`}
                           </th>
@@ -39,7 +32,7 @@ export default function ShareholdingPattern({ shareholding }: Props) {
                     </thead>
                     <tbody>
                       <tr className="border-b border-[#eef3fb]">
-                        {entries.map((entry, eIdx) => (
+                        {entries.map((entry: any, eIdx: number) => (
                           <td key={eIdx} className="whitespace-nowrap px-3 py-2 font-semibold text-[#3d5178]">
                             {entry.percentage != null ? `${entry.percentage}%` : "—"}
                           </td>

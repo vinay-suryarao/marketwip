@@ -21,7 +21,7 @@ export default function CorporateActions({ actions }: Props) {
   
   const filteredActions = activeTab === "All" 
     ? validActions 
-    : validActions.filter(a => a.purpose?.toLowerCase().includes(activeTab.toLowerCase()));
+    : validActions.filter(a => String(a.purpose || "").toLowerCase().includes(activeTab.toLowerCase()));
 
   return (
     <div className="mt-4 flex justify-end">

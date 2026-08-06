@@ -23,7 +23,7 @@ export type CompanyData = {
   yearHigh?: number;
   yearLow?: number;
 
-  keyMetrics?: Record<string, string | number | null>;
+  keyMetrics?: any;
   technicals?: Record<string, string | number | null>;
   stockTechnicalData?: Record<string, string | number | null>;
 
@@ -34,13 +34,15 @@ export type CompanyData = {
 
   shareholding?: ShareholdingCategory[];
 
-  peerComparison?: PeerRow[];
+  peerCompanyList?: PeerRow[];
 
   stockCorporateActionData?: CorporateActionRow[];
 
   recentNews?: NewsItem[];
 
   analystView?: Record<string, unknown>;
+
+  stockDetailsReusableData?: any;
 };
 
 /* ─── Quarterly / Annual financial rows ─── */
@@ -77,10 +79,15 @@ export type CorporateActionRow = {
 
 export type NewsItem = {
   title?: string;
+  headline?: string;
   description?: string;
   link?: string;
+  url?: string;
   date?: string;
+  lastPublishedDate?: string;
   source?: string;
   thumbnail?: string;
+  thumbnailImage?: string;
+  listimage?: string;
   [key: string]: unknown;
 };

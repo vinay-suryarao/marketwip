@@ -7,7 +7,7 @@ export default function AboutCompany({ data }: Props) {
 
   // Extract necessary fields
   const companyName = data.companyName || "Unknown Company";
-  const price = data.currentPrice?.price || data.stockDetailsReusableData?.price || "—";
+  const price = data.currentPrice?.NSE || data.currentPrice?.BSE || data.stockDetailsReusableData?.price || "—";
   const change = data.percentChange || data.stockDetailsReusableData?.percentChange || "0";
   const isPositive = parseFloat(change) >= 0;
 
