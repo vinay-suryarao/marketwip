@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FIIDIIActivityDisplay from "@/components/shared/FIIDIIActivityDisplay";
 import EconomicMapWidget from "@/components/shared/EconomicMapWidget";
+import AnalyzerSearch from "@/components/shared/AnalyzerSearch";
 import { NEWS_CATEGORIES } from "@/constants/newsCategories";
 
 const categoryCardMeta: Record<
@@ -131,26 +132,32 @@ export default function HomePage() {
           Track work orders, acquisitions, capacity expansions, MoUs, financial results, and economic events from India&apos;s leading companies.
         </p>
 
-        <form action="/news" className="mx-auto mt-6 max-w-4xl">
-          <label htmlFor="home-search" className="sr-only">
-            Search for companies and stocks
-          </label>
-          <div className="relative">
-            <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8da0c4]">
-              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current" strokeWidth="2">
-                <circle cx="11" cy="11" r="7" />
-                <path d="M20 20 L16.5 16.5" />
-              </svg>
-            </span>
-            <input
-              id="home-search"
-              name="q"
-              type="search"
-              placeholder="Search for companies and stocks to analyse"
-              className="h-14 w-full rounded-xl border border-[#cbdcf7] bg-[#ffffff] pl-12 pr-4 text-[15px] font-medium text-[#173462] outline-none transition placeholder:text-[#8da0c4] focus:border-[#2e7ac9] focus:ring-4 focus:ring-[#2e7ac9]/15"
-            />
+        <div className="mx-auto mt-6 flex max-w-5xl flex-col gap-4 lg:flex-row">
+          <form action="/news" className="flex-1">
+            <label htmlFor="home-search" className="sr-only">
+              Search for news
+            </label>
+            <div className="relative h-full">
+              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8da0c4]">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-current" strokeWidth="2">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20 L16.5 16.5" />
+                </svg>
+              </span>
+              <input
+                id="home-search"
+                name="q"
+                type="search"
+                placeholder="Search for news"
+                className="h-14 w-full rounded-2xl border border-[#cbdcf7] bg-[#ffffff] pl-12 pr-4 text-[15px] font-medium text-[#173462] shadow-[0_10px_30px_rgba(24,58,120,0.1)] outline-none transition placeholder:text-[#8da0c4] focus:border-[#2e7ac9] focus:ring-4 focus:ring-[#2e7ac9]/15 sm:h-16 sm:text-lg"
+              />
+            </div>
+          </form>
+
+          <div className="flex-[1.2]">
+            <AnalyzerSearch />
           </div>
-        </form>
+        </div>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           <Link href="/news" className="rounded-full border border-[#cddcf6] bg-[#ffffff] px-4 py-2 text-xs font-bold text-[#2e7ac9] transition hover:bg-[#f1f7ff] sm:text-sm">

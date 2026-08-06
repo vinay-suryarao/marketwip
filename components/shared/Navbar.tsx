@@ -15,6 +15,7 @@ const links = [
   { href: "/ipo-dashboard", label: "IPO Dashboard" },
   { href: "/results", label: "Results" },
   { href: "/economic-calendar", label: "Economic Calendar" },
+  { href: "/analyzer", label: "Market Analyzer" },
   { href: "/about", label: "About" },
 ];
 
@@ -30,21 +31,20 @@ export default function Navbar() {
       : links;
 
   return (
-    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#2a3f7a] bg-[#0d1a47]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#2a3f7a] bg-[#070F2B]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-93RL5XKD6E"
         strategy="afterInteractive"
       />
-      <div className="ticker-window border-b border-[#2a3f7a] bg-[#101f50] px-2.5 py-1.5 text-[10px] font-medium tracking-[0.09em] text-[#8fd9ff]">
+      <div className="ticker-window border-b border-[#2a3f7a] bg-transparent px-2.5 py-1.5 text-[10px] font-medium tracking-[0.09em] text-[#8fd9ff]">
         <LiveMarketTicker />
       </div>
 
       <nav className="mx-auto w-full max-w-300 overflow-hidden px-4 py-3 sm:px-5 md:px-8">
         <div className="flex min-w-0 items-center gap-3 md:gap-5">
-          <Link href="/" className="min-w-0 flex-1 md:flex-none">
+          <Link href="/" className="min-w-0 flex-1 md:flex-none -ml-2 mr-6 sm:mr-10 md:mr-12">
             <BrandLogo
-              className="h-10 w-10 object-cover sm:h-11 sm:w-11"
-              textClassName="inline-block max-w-[9.75rem] truncate text-lg sm:max-w-none sm:text-3xl"
+              className="h-10 w-auto object-contain sm:h-11 scale-[1.35] sm:scale-150 origin-left"
               priority
             />
           </Link>

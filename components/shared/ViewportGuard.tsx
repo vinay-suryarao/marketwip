@@ -7,23 +7,13 @@ export default function ViewportGuard() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isHomeRoute = pathname === "/";
-
     const resetViewportOffset = () => {
-      // Some mobile browsers can restore stale horizontal and vertical scroll positions on reload.
-      window.scrollTo({ left: 0, top: isHomeRoute ? 0 : window.scrollY, behavior: "auto" });
+      // Some mobile browsers can restore stale horizontal scroll positions on reload.
+      window.scrollTo({ left: 0, top: window.scrollY, behavior: "auto" });
       document.documentElement.scrollLeft = 0;
       document.body.scrollLeft = 0;
       if (document.scrollingElement) {
         document.scrollingElement.scrollLeft = 0;
-      }
-
-      if (isHomeRoute) {
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        if (document.scrollingElement) {
-          document.scrollingElement.scrollTop = 0;
-        }
       }
     };
 

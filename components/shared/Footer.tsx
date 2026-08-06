@@ -12,11 +12,11 @@ const quickLinks = [
 
 export default function Footer() {
   return (
-    <footer className="mt-14 border-t border-[#2a3f7a] bg-[#0d1a47] text-[#c8d7f8] shadow-[0_-12px_32px_rgba(4,9,30,0.4)]">
+    <footer className="mt-14 border-t border-[#2a3f7a] bg-[#070F2B]/95 backdrop-blur-md text-[#c8d7f8] shadow-[0_-12px_32px_rgba(4,9,30,0.4)]">
       <section className="mx-auto grid w-full max-w-310 gap-8 px-4 py-10 sm:px-6 md:grid-cols-3 md:px-8 md:py-12">
         <div>
           <div className="mb-4">
-            <BrandLogo className="h-16 w-16 object-cover scale-225" textClassName="text-2xl sm:text-3xl" />
+            <BrandLogo className="h-16 w-auto object-contain sm:h-20" />
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#b9caef]">
             Stay ahead with market updates, watchlist-driven insights, and clean dashboards designed for fast decisions.

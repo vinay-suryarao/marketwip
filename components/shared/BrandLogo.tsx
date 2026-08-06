@@ -2,30 +2,24 @@ import Image from "next/image";
 
 type Props = {
   className?: string;
-  textClassName?: string;
   priority?: boolean;
 };
 
 export default function BrandLogo({
-  className = "h-16 w-auto",
-  textClassName = "text-2xl",
+  className = "h-10 w-auto object-contain",
   priority = false,
 }: Props) {
   return (
-    <div className="inline-flex items-center gap-3">
+    <div className="inline-flex items-center">
       <Image
-        src="/logo.png"
+        src="/mwiplogo.png"
         alt="Market W.I.P"
-        width={640}
-        height={481}
+        width={800}
+        height={200}
         priority={priority}
         unoptimized
         className={className}
       />
-
-      <span className={`font-display font-extrabold tracking-tight whitespace-nowrap text-white ${textClassName}`}>
-        Market W.I.P
-      </span>
     </div>
   );
 }

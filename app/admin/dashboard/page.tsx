@@ -64,6 +64,16 @@ function AdminDashboardPage() {
                   Add News Post
                 </button>
               </Link>
+              <Link href="/admin/company-about">
+                <button className="rounded-xl border border-[#d8e2f5] bg-[#f6f9ff] px-5 py-2.5 text-sm font-bold tracking-wide text-[#2e7ac9] transition hover:bg-[#d8e2f5] hover:text-[#173462]">
+                  Company Info
+                </button>
+              </Link>
+              <Link href="/admin/company-summary">
+                <button className="rounded-xl border border-[#d8e2f5] bg-[#f6f9ff] px-5 py-2.5 text-sm font-bold tracking-wide text-[#2e7ac9] transition hover:bg-[#d8e2f5] hover:text-[#173462]">
+                  Company Summary
+                </button>
+              </Link>
             </div>
           </div>
 

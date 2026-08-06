@@ -3,7 +3,7 @@ export const NEWS_CATEGORIES = [
   { value: "acquisitions", label: "Acquisitions" },
   { value: "capacity-expansions", label: "Capacity Expansions" },
   { value: "mou", label: "MOU" },
-  { value: "results", label: "Results" },
+  { value: "results", label: "New Business / Product Launch" },
   { value: "other", label: "Other" },
 ] as const;
 

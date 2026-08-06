@@ -76,7 +76,7 @@ export default function DashboardPage() {
                 href="/news/category/results"
                 className="rounded-xl border border-[#c9d9f6] bg-white px-4 py-2 text-sm font-semibold text-[#27447f] transition hover:bg-[#edf3ff]"
               >
-                Results Feed
+                New Business / Product Launch
               </Link>
             </div>
           </article>

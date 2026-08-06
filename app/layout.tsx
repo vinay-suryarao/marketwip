@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "Stock news and alerts platform",
   icons: {
     icon: "/icon.svg",
-    apple: "/apple-icon.png",
+    apple: "/icon.svg",
   },
 };
 
