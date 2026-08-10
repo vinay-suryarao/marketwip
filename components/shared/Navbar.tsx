@@ -26,12 +26,10 @@ export default function Navbar() {
 
   const navLinks = isAdmin
     ? [...links, { href: "/admin/dashboard", label: "Admin" }]
-    : user
-      ? [...links, { href: "/dashboard", label: "Dashboard" }]
-      : links;
+    : links;
 
   return (
-    <header className="sticky top-0 z-50 w-full overflow-hidden border-b border-[#2a3f7a] bg-[#070F2B]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-[#2a3f7a] bg-[#070F2B]/95 shadow-[0_14px_32px_rgba(5,11,34,0.45)] backdrop-blur-md">
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-93RL5XKD6E"
         strategy="afterInteractive"
@@ -40,16 +38,16 @@ export default function Navbar() {
         <LiveMarketTicker />
       </div>
 
-      <nav className="mx-auto w-full max-w-300 overflow-hidden px-4 py-3 sm:px-5 md:px-8">
+      <nav className="mx-auto w-full max-w-300 px-4 py-3 sm:px-5 md:px-8">
         <div className="flex min-w-0 items-center gap-3 md:gap-5">
-          <Link href="/" className="min-w-0 flex-1 md:flex-none -ml-2 mr-6 sm:mr-10 md:mr-12">
+          <Link href="/" className="min-w-0 flex-1 md:flex-none -ml-2 mr-3 sm:mr-5 md:mr-6">
             <BrandLogo
               className="h-10 w-auto object-contain sm:h-11 scale-[1.35] sm:scale-150 origin-left"
               priority
             />
           </Link>
 
-          <ul className="hidden flex-1 items-center justify-center gap-1 md:flex lg:gap-2">
+          <ul className="hidden min-w-0 flex-1 items-center justify-center gap-0 md:flex lg:gap-0.5">
             {navLinks.map((link) => {
               const active =
                 link.href === "/"
@@ -59,7 +57,7 @@ export default function Navbar() {
               return (
                 <li key={link.href}>
                   <Link
-                    className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition lg:px-3.5 ${
+                    className={`whitespace-nowrap rounded-md px-1.5 py-1.5 text-xs font-semibold transition lg:px-2.5 ${
                       active
                         ? "bg-[#1a3172] text-[#8fe1ff]"
                         : "text-[#d8e4ff] hover:bg-[#142a63] hover:text-white"
@@ -74,17 +72,17 @@ export default function Navbar() {
             })}
           </ul>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden shrink-0 items-center gap-1.5 ml-2 md:flex">
             {!user ? (
               <>
                 <Link
-                  className="rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-sm font-semibold text-[#dce8ff] transition hover:border-[#5270ba] hover:bg-[#19306f]"
+                  className="rounded-md border border-[#3a518f] bg-[#13255c] px-3 py-1.5 text-xs font-semibold text-[#dce8ff] transition hover:border-[#5270ba] hover:bg-[#19306f]"
                   href="/login"
                 >
                   Login
                 </Link>
                 <Link
-                  className="rounded-lg border border-[#f3cb67] bg-[#e9b742] px-4 py-2 text-sm font-bold text-[#13204a] transition hover:bg-[#f2c95f]"
+                  className="rounded-md border border-[#f3cb67] bg-[#e9b742] px-3 py-1.5 text-xs font-bold text-[#13204a] transition hover:bg-[#f2c95f]"
                   href="/signup"
                 >
                   Sign Up
@@ -93,17 +91,25 @@ export default function Navbar() {
             ) : (
               <>
                 {!isAdmin ? (
-                  <Link
-                    className="rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-sm font-semibold text-[#dce8ff] transition hover:border-[#5270ba] hover:bg-[#19306f]"
-                    href="/wishlist"
-                  >
-                    Wishlist
-                  </Link>
+                  <>
+                    <Link
+                      className="rounded-md border border-[#3a518f] bg-[#13255c] px-3 py-1.5 text-xs font-semibold text-[#dce8ff] transition hover:border-[#5270ba] hover:bg-[#19306f]"
+                      href="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      className="rounded-md border border-[#3a518f] bg-[#13255c] px-3 py-1.5 text-xs font-semibold text-[#dce8ff] transition hover:border-[#5270ba] hover:bg-[#19306f]"
+                      href="/wishlist"
+                    >
+                      Wishlist
+                    </Link>
+                  </>
                 ) : null}
                 <button
                   type="button"
                   onClick={() => signOutUser()}
-                  className="rounded-lg border border-[#f3cb67] bg-[#e9b742] px-4 py-2 text-sm font-bold text-[#13204a] transition hover:bg-[#f2c95f]"
+                  className="rounded-md border border-[#f3cb67] bg-[#e9b742] px-3 py-1.5 text-xs font-bold text-[#13204a] transition hover:bg-[#f2c95f]"
                 >
                   Logout
                 </button>
@@ -166,13 +172,21 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div className="space-y-2">
-                  {!isAdmin ? (
-                    <Link
-                      className="block rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-center text-sm font-semibold text-[#dce8ff]"
-                      href="/wishlist"
-                    >
-                      Wishlist
-                    </Link>
+                {!isAdmin ? (
+                    <>
+                      <Link
+                        className="block rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-center text-sm font-semibold text-[#dce8ff]"
+                        href="/dashboard"
+                      >
+                        Dashboard
+                      </Link>
+                      <Link
+                        className="block rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-center text-sm font-semibold text-[#dce8ff]"
+                        href="/wishlist"
+                      >
+                        Wishlist
+                      </Link>
+                    </>
                   ) : null}
                   <button
                     type="button"
