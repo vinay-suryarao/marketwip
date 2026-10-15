@@ -54,9 +54,14 @@ function AdminDashboardPage() {
                   Results Manager
                 </button>
               </Link>
-              <Link href="/admin/ipo-dashboard">
+              <Link href="/admin/growth-stocks">
                 <button className="rounded-xl border border-[#d8e2f5] bg-[#f6f9ff] px-5 py-2.5 text-sm font-bold tracking-wide text-[#2e7ac9] transition hover:bg-[#d8e2f5] hover:text-[#173462]">
-                  IPO Dashboard
+                  Growth Stocks
+                </button>
+              </Link>
+              <Link href="/admin/gov-policies">
+                <button className="rounded-xl border border-[#d8e2f5] bg-[#f6f9ff] px-5 py-2.5 text-sm font-bold tracking-wide text-[#2e7ac9] transition hover:bg-[#d8e2f5] hover:text-[#173462]">
+                  Gov Policies
                 </button>
               </Link>
               <Link href="/admin/create-post">

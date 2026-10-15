@@ -12,10 +12,10 @@ import LiveMarketTicker from "@/components/shared/LiveMarketTicker";
 const links = [
   { href: "/", label: "Home" },
   { href: "/news", label: "News" },
-  { href: "/ipo-dashboard", label: "IPO Dashboard" },
-  { href: "/results", label: "Results" },
-  { href: "/economic-calendar", label: "Economic Calendar" },
   { href: "/analyzer", label: "Market Analyzer" },
+  { href: "/growth-stocks", label: "Growth Stocks" },
+  { href: "/gov-policies", label: "Gov Policies" },
+  { href: "/results", label: "Results" },
   { href: "/about", label: "About" },
 ];
 

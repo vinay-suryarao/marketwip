@@ -45,5 +45,15 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    match /growthStocks/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /govPolicies/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }

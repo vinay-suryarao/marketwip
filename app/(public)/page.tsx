@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FIIDIIActivityDisplay from "@/components/shared/FIIDIIActivityDisplay";
 import EconomicMapWidget from "@/components/shared/EconomicMapWidget";
+import EconomicCalendarWidget from "@/components/shared/EconomicCalendarWidget";
 import AnalyzerSearch from "@/components/shared/AnalyzerSearch";
 import { NEWS_CATEGORIES } from "@/constants/newsCategories";
 
@@ -235,6 +236,11 @@ export default function HomePage() {
         <div className="mt-6 overflow-hidden rounded-xl border border-[#deebff] bg-[#fbfdff] p-3 sm:p-4">
           <h3 className="mb-3 text-base font-extrabold text-[#173462] sm:text-lg">Economic Map</h3>
           <EconomicMapWidget />
+        </div>
+
+        <div className="mt-6 overflow-hidden rounded-xl border border-[#deebff] bg-[#fbfdff] p-3 sm:p-4">
+          <h3 className="mb-3 text-base font-extrabold text-[#173462] sm:text-lg">Economic Calendar</h3>
+          <EconomicCalendarWidget />
         </div>
       </section>
     </main>
