@@ -42,6 +42,13 @@ export type CompanyData = {
 
   analystView?: Record<string, unknown>;
 
+  documents?: any;
+
+  segmentRevenue?: {
+    annual?: any[];
+    quarterly?: any[];
+  };
+
   stockDetailsReusableData?: any;
 };
 

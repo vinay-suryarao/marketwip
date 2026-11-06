@@ -2,6 +2,20 @@ import type { FinancialRow } from "@/types/analyzer";
 
 type Props = { rows?: FinancialRow[] };
 
+const HIGHLIGHT_METRICS = [
+  "operating profit",
+  "profit before tax",
+  "net profit",
+  "total liabilities",
+  "total assets",
+  "ebitda",
+  "ebit",
+];
+
+function isHighlighted(metric: string): boolean {
+  return HIGHLIGHT_METRICS.some((h) => metric.toLowerCase().includes(h));
+}
+
 export default function ProfitLoss({ rows }: Props) {
   if (!rows || !Array.isArray(rows) || rows.length === 0) return null;
   const validRows = rows.filter((r) => r != null && typeof r === "object");
@@ -10,20 +24,20 @@ export default function ProfitLoss({ rows }: Props) {
   const columns = Object.keys(validRows[0]);
 
   return (
-    <section className="rounded-3xl border border-[#d8e2f5] bg-linear-to-b from-[#ffffff] to-[#f8fbff] p-6 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-8">
-      <div className="mb-4 border-b border-[#d8e2f5] pb-4">
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#5f77a5]">Annual Financials</p>
-        <h2 className="mt-1 text-xl font-extrabold text-[#173462] sm:text-2xl">Profit &amp; Loss</h2>
+    <section className="rounded-3xl border border-[#d8e2f5] bg-white p-6 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-8">
+      <div className="mb-5 border-b border-[#d8e2f5] pb-4">
+        <h2 className="text-2xl font-extrabold text-[#173462] sm:text-3xl">Profit &amp; Loss</h2>
+        <p className="mt-1 text-xs font-medium text-[#8599c1]">Consolidated Figures in Rs. Crores</p>
       </div>
 
       <div className="-mx-2 overflow-x-auto px-2">
-        <table className="w-full min-w-[640px] text-left text-sm">
+        <table className="w-full min-w-[640px] text-right text-sm">
           <thead>
-            <tr className="border-b border-[#d8e2f5]">
-              {columns.map((col) => (
+            <tr className="border-b-2 border-[#d8e2f5]">
+              {columns.map((col, idx) => (
                 <th
                   key={col}
-                  className="whitespace-nowrap px-3 py-3 text-[10px] font-bold uppercase tracking-[0.12em] text-[#6074a0]"
+                  className={`whitespace-nowrap px-3 py-3 text-[11px] font-bold uppercase tracking-[0.08em] text-[#6074a0] ${idx === 0 ? "text-left" : ""}`}
                 >
                   {col}
                 </th>
@@ -31,18 +45,33 @@ export default function ProfitLoss({ rows }: Props) {
             </tr>
           </thead>
           <tbody>
-            {validRows.map((row, idx) => (
-              <tr
-                key={idx}
-                className="border-b border-[#eef3fb] transition hover:bg-[#f5f8ff]"
-              >
-                {columns.map((col) => (
-                  <td key={col} className="whitespace-nowrap px-3 py-3 font-semibold text-[#3d5178]">
-                    {row[col] != null ? String(row[col]) : "—"}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {validRows.map((row, idx) => {
+              const metricName = String(row[columns[0]] ?? "");
+              const highlight = isHighlighted(metricName);
+              return (
+                <tr
+                  key={idx}
+                  className={`border-b transition hover:bg-[#f5f8ff] ${
+                    highlight
+                      ? "border-[#d0d9ef] bg-[#f0f4fb] font-extrabold"
+                      : "border-[#eef3fb]"
+                  }`}
+                >
+                  {columns.map((col, cIdx) => (
+                    <td
+                      key={col}
+                      className={`whitespace-nowrap px-3 py-2.5 ${
+                        cIdx === 0
+                          ? `text-left font-semibold ${highlight ? "text-[#173462]" : "text-[#3d5178]"}`
+                          : `tabular-nums ${highlight ? "text-[#173462]" : "text-[#3d5178]"}`
+                      }`}
+                    >
+                      {row[col] != null ? String(row[col]) : "—"}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

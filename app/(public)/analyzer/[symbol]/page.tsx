@@ -5,16 +5,15 @@ import { getCustomCompanySummary } from "@/lib/services/companySummaryService";
 import type { CompanyData } from "@/types/analyzer";
 import CompanyHeader from "@/components/analyzer/CompanyHeader";
 import PriceChart from "@/components/analyzer/PriceChart";
-import AboutCompany from "@/components/analyzer/AboutCompany";
 import KeyRatios from "@/components/analyzer/KeyRatios";
 import PeerComparison from "@/components/analyzer/PeerComparison";
 import QuarterlyResults from "@/components/analyzer/QuarterlyResults";
 import ProfitLoss from "@/components/analyzer/ProfitLoss";
 import BalanceSheet from "@/components/analyzer/BalanceSheet";
 import CashFlow from "@/components/analyzer/CashFlow";
+import RevenueBySegment from "@/components/analyzer/RevenueBySegment";
 import ShareholdingPattern from "@/components/analyzer/ShareholdingPattern";
-import CorporateActions from "@/components/analyzer/CorporateActions";
-import LatestNews from "@/components/analyzer/LatestNews";
+import Documents from "@/components/analyzer/Documents";
 import CompanySummary from "@/components/analyzer/CompanySummary";
 
 type PageProps = {
@@ -34,19 +33,19 @@ export default async function CompanyPage({ params }: PageProps) {
 
   try {
     data = await fetchStockData(decodedSymbol);
-    
+
     // Fetch custom "About" override - try multiple keys due to variations (e.g. "HDFCBANK" vs "HDFC Bank")
     if (data) {
       customAbout = await getCustomCompanyAbout(decodedSymbol);
-      
+
       if (!customAbout && data.companyName) {
         customAbout = await getCustomCompanyAbout(data.companyName);
       }
-      
+
       if (!customAbout && data.tickerId) {
         customAbout = await getCustomCompanyAbout(data.tickerId);
       }
-      
+
       customSummary = await getCustomCompanySummary(decodedSymbol);
       if (!customSummary && data.companyName) {
         customSummary = await getCustomCompanySummary(data.companyName);
@@ -91,43 +90,48 @@ export default async function CompanyPage({ params }: PageProps) {
       <CompanyHeader data={data} customAbout={customAbout} />
 
       {/* 2. Interactive Price Chart */}
-      <PriceChart 
-        symbol={decodedSymbol} 
-        companyName={data.companyName} 
-        nseCode={(data.companyProfile as any)?.exchangeCodeNse}
-        bseCode={(data.companyProfile as any)?.exchangeCodeBse}
+      <PriceChart
+        symbol={decodedSymbol}
+        companyName={data.companyName}
+        nseCode={data.stockDetailsReusableData?.nseCode || data.tickerId || (data.companyProfile as any)?.exchangeCodeNse}
+        bseCode={data.stockDetailsReusableData?.bseCode || (data.companyProfile as any)?.exchangeCodeBse}
       />
 
-      {/* 3. About Company (Hero Section) */}
-      <AboutCompany data={data} />
-
-      {/* 4. Key Ratios */}
+      {/* 3. Key Ratios (wapas leke aaya same format me) */}
       <KeyRatios metrics={data.keyMetrics} />
 
-      {/* 5. Peer Comparison */}
-      <PeerComparison peers={data.peerCompanyList} />
+      {/* 4. Peer Comparison (ratios ke niche) */}
+      <PeerComparison
+        peers={data.peerCompanyList}
+        currentSymbol={decodedSymbol}
+        sector={data.industry || (data.stockDetailsReusableData?.sector)}
+      />
 
-      {/* 6. Quarterly Results */}
+      {/* 5. Quarterly Results */}
       <QuarterlyResults rows={data.quarterlyResults} />
 
-      {/* 7. Profit & Loss */}
+      {/* 6. Profit & Loss */}
       <ProfitLoss rows={data.profitLoss} />
 
-      {/* 8. Balance Sheet & Corporate Actions */}
-      <div className="relative">
-        <BalanceSheet rows={data.balanceSheet} />
-        <div className="absolute right-8 top-6 sm:top-8">
-          <CorporateActions actions={data.stockCorporateActionData} />
-        </div>
-      </div>
+      {/* 7. Balance Sheet & Corporate Actions */}
+      <BalanceSheet
+        rows={data.balanceSheet}
+        actions={data.stockCorporateActionData}
+      />
+
+      {/* 8. Shareholding Pattern */}
+      <ShareholdingPattern shareholding={data.shareholding} />
 
       {/* 9. Cash Flow */}
       <CashFlow rows={data.cashFlow} />
 
-      {/* 10. Shareholding Pattern */}
-      <ShareholdingPattern shareholding={data.shareholding} />
+      {/* 10. Revenue by Segment (cash flow ke bad) */}
+      <RevenueBySegment data={data.segmentRevenue} />
 
-      {/* 11. Custom Company Summary */}
+      {/* 11. Documents */}
+      <Documents documents={data.documents} />
+
+      {/* 12. Custom Company Summary */}
       <CompanySummary summary={customSummary} />
     </main>
   );

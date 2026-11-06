@@ -1,59 +1,78 @@
 "use client";
+
 import { useState } from "react";
 import type { CorporateActionRow } from "@/types/analyzer";
 
 type Props = { actions?: CorporateActionRow[] };
 
+const TABS = ["Equity History", "ESOPs", "Prefs", "Dividend", "Bonus", "Merger", "Right", "Buy Back"];
+
 export default function CorporateActions({ actions }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("All");
+  const [activeTab, setActiveTab] = useState("Equity History");
 
   let actionsArray = actions;
   if (actions && !Array.isArray(actions) && typeof actions === "object" && "value" in actions) {
     actionsArray = (actions as any).value;
   }
 
-  if (!actionsArray || !Array.isArray(actionsArray) || actionsArray.length === 0) return null;
-  const validActions = actionsArray.filter((a) => a != null && typeof a === "object");
-  if (validActions.length === 0) return null;
+  const validActions = Array.isArray(actionsArray)
+    ? actionsArray.filter((a) => a != null && typeof a === "object")
+    : [];
 
-  const tabs = ["All", "Dividend", "Bonus", "Split", "Results"];
-  
-  const filteredActions = activeTab === "All" 
-    ? validActions 
-    : validActions.filter(a => String(a.purpose || "").toLowerCase().includes(activeTab.toLowerCase()));
+  const filteredActions = activeTab === "Equity History"
+    ? validActions
+    : validActions.filter((a) => {
+        const purpose = String(a.purpose || a.type || a.action || "").toLowerCase();
+        const tabLower = activeTab.toLowerCase();
+        return purpose.includes(tabLower) || purpose.includes(tabLower.replace(" ", ""));
+      });
 
+  // Always show the button (even without data)
   return (
-    <div className="mt-4 flex justify-end">
-      <button 
+    <>
+      <button
+        type="button"
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 rounded-lg border border-[#d8e2f5] bg-white px-4 py-2 text-sm font-bold text-[#2e7ac9] transition hover:bg-[#f5f8ff]"
+        className="rounded-lg border border-[#6366f1] bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#4f46e5] transition hover:bg-[#eef2ff]"
       >
-        <span>⚡</span> Corporate Actions
+        CORPORATE ACTIONS
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/40 px-4 backdrop-blur-sm" onClick={() => setIsOpen(false)}>
-          <div 
-            className="flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
-            onClick={e => e.stopPropagation()}
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-xs"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#eef3fb] p-6">
-              <h2 className="text-xl font-extrabold text-[#173462]">Corporate actions</h2>
-              <button onClick={() => setIsOpen(false)} className="text-[#8599c1] hover:text-[#173462]">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-[#eef3fb] px-6 py-5">
+              <h2 className="text-xl font-extrabold text-[#173462] sm:text-2xl">Corporate actions</h2>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="text-[#8599c1] hover:text-[#173462] transition"
+              >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            
-            <div className="flex gap-2 border-b border-[#eef3fb] px-6 pt-4 overflow-x-auto">
-              {tabs.map(tab => (
+
+            {/* Tabs */}
+            <div className="flex gap-1 border-b border-[#eef3fb] px-6 pt-3 overflow-x-auto">
+              {TABS.map((tab) => (
                 <button
                   key={tab}
+                  type="button"
                   onClick={() => setActiveTab(tab)}
-                  className={`border-b-2 px-4 pb-3 text-sm font-bold transition-colors ${
-                    activeTab === tab ? "border-[#2e7ac9] text-[#2e7ac9]" : "border-transparent text-[#6074a0] hover:text-[#3d5178]"
+                  className={`whitespace-nowrap border-b-2 px-3 pb-3 text-xs sm:text-sm font-semibold transition-colors ${
+                    activeTab === tab
+                      ? "border-[#4f46e5] text-[#4f46e5]"
+                      : "border-transparent text-[#6074a0] hover:text-[#3d5178]"
                   }`}
                 >
                   {tab}
@@ -61,40 +80,76 @@ export default function CorporateActions({ actions }: Props) {
               ))}
             </div>
 
+            {/* Content */}
             <div className="overflow-y-auto p-6">
-              <table className="w-full text-left text-sm">
-                <thead>
-                  <tr className="border-b border-[#eef3fb]">
-                    <th className="pb-3 pr-4 font-semibold text-[#8599c1]">Date</th>
-                    <th className="pb-3 font-semibold text-[#8599c1]">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
+              {validActions.length > 0 ? (
+                <>
+                  {/* Column Headers */}
+                  <div className="mb-2 flex border-b border-[#eef3fb] pb-2 text-xs font-semibold text-[#8599c1]">
+                    <span className="w-24 shrink-0">Date</span>
+                    <span className="flex-1">Details</span>
+                  </div>
+
                   {filteredActions.length > 0 ? (
-                    filteredActions.map((row: any, idx) => (
-                      <tr key={idx} className="border-b border-[#eef3fb] last:border-0">
-                        <td className="py-4 pr-4 align-top">
-                          <div className="whitespace-nowrap font-bold text-[#173462]">
-                            {row.boardMeetDate ? new Date(row.boardMeetDate).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }) : "—"}
+                    <div className="space-y-0">
+                      {filteredActions.map((row: any, idx: number) => {
+                        const dateStr = row.date || row.boardMeetDate || row.recordDate || "";
+                        let year = "";
+                        let monthDay = "";
+                        if (dateStr) {
+                          const d = new Date(dateStr);
+                          if (!isNaN(d.getTime())) {
+                            year = String(d.getFullYear());
+                            monthDay = d.toLocaleDateString("en-US", { month: "short", day: "2-digit" });
+                          }
+                        }
+
+                        return (
+                          <div key={idx} className="flex border-b border-[#eef3fb] py-3.5 last:border-0">
+                            <div className="w-24 shrink-0">
+                              {year ? (
+                                <>
+                                  <p className="text-sm font-bold text-[#173462]">{year}</p>
+                                  <p className="text-xs text-[#8599c1]">{monthDay}</p>
+                                </>
+                              ) : (
+                                <p className="text-sm text-[#8599c1]">—</p>
+                              )}
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-bold text-[#173462]">
+                                {row.type || row.purpose || row.action || "—"}
+                              </p>
+                              {(row.details || row.remarks || row.description) && (
+                                <p className="mt-0.5 text-xs sm:text-sm text-[#6074a0]">
+                                  {row.details || row.remarks || row.description}
+                                </p>
+                              )}
+                            </div>
                           </div>
-                        </td>
-                        <td className="py-4 align-top">
-                          <div className="font-bold text-[#173462]">{row.purpose || "—"}</div>
-                          {row.remarks && <div className="mt-1 text-[#6074a0]">{row.remarks}</div>}
-                        </td>
-                      </tr>
-                    ))
+                        );
+                      })}
+                    </div>
                   ) : (
-                    <tr>
-                      <td colSpan={2} className="py-8 text-center text-[#8599c1]">No actions found for this category.</td>
-                    </tr>
+                    <p className="py-8 text-center text-sm text-[#8599c1]">No actions found for &quot;{activeTab}&quot;.</p>
                   )}
-                </tbody>
-              </table>
+                </>
+              ) : (
+                /* Empty state for free plan */
+                <div className="flex flex-col items-center justify-center py-16">
+                  <svg className="mb-3 h-12 w-12 text-[#b0c4e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <p className="text-sm font-bold text-[#6074a0]">Corporate actions data not available</p>
+                  <p className="mt-1 text-xs text-[#8599c1]">
+                    This data will appear automatically when available in your FinEdge plan.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
-type StockItem = { id: string; name: string; "bse-code"?: string };
+type StockItem = { id: string; name: string; "bse-code"?: string; symbol?: string };
 
 export default function AnalyzerSearch() {
   const router = useRouter();
@@ -64,7 +64,8 @@ export default function AnalyzerSearch() {
   }, [query, stocks]);
 
   function navigateToStock(stock: StockItem) {
-    const symbol = stock.name || stock.id;
+    // Use the stock id (symbol) for URL since FinEdge API needs exact symbol
+    const symbol = stock.id || stock.name;
     setQuery(stock.name);
     setIsOpen(false);
     router.push(`/analyzer/${encodeURIComponent(symbol)}`);

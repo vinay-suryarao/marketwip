@@ -13,6 +13,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/news", label: "News" },
   { href: "/analyzer", label: "Market Analyzer" },
+  { href: "/superstars", label: "Superstar Portfolio" },
   { href: "/growth-stocks", label: "Growth Stocks" },
   { href: "/gov-policies", label: "Gov Policies" },
   { href: "/results", label: "Results" },
@@ -57,11 +58,10 @@ export default function Navbar() {
               return (
                 <li key={link.href}>
                   <Link
-                    className={`whitespace-nowrap rounded-md px-1.5 py-1.5 text-xs font-semibold transition lg:px-2.5 ${
-                      active
+                    className={`whitespace-nowrap rounded-md px-1.5 py-1.5 text-xs font-semibold transition lg:px-2.5 ${active
                         ? "bg-[#1a3172] text-[#8fe1ff]"
                         : "text-[#d8e4ff] hover:bg-[#142a63] hover:text-white"
-                    }`}
+                      }`}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -141,11 +141,10 @@ export default function Navbar() {
                   <li key={`mobile-${link.href}`}>
                     <Link
                       href={link.href}
-                      className={`block rounded-lg px-3 py-2 text-sm font-semibold transition ${
-                        active
+                      className={`block rounded-lg px-3 py-2 text-sm font-semibold transition ${active
                           ? "bg-[#1a3172] text-[#8fe1ff]"
                           : "text-[#d8e4ff] hover:bg-[#142a63] hover:text-white"
-                      }`}
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -172,7 +171,7 @@ export default function Navbar() {
                 </div>
               ) : (
                 <div className="space-y-2">
-                {!isAdmin ? (
+                  {!isAdmin ? (
                     <>
                       <Link
                         className="block rounded-lg border border-[#3a518f] bg-[#13255c] px-4 py-2 text-center text-sm font-semibold text-[#dce8ff]"
