@@ -108,14 +108,15 @@ export default async function CompanyPage({ params }: PageProps) {
       />
 
       {/* 5. Quarterly Results */}
-      <QuarterlyResults rows={data.quarterlyResults} />
+      <QuarterlyResults rows={data.quarterlyResults} standaloneRows={data.quarterlyResultsStandalone} />
 
       {/* 6. Profit & Loss */}
-      <ProfitLoss rows={data.profitLoss} />
+      <ProfitLoss rows={data.profitLoss} standaloneRows={data.profitLossStandalone} />
 
       {/* 7. Balance Sheet & Corporate Actions */}
       <BalanceSheet
         rows={data.balanceSheet}
+        standaloneRows={data.balanceSheetStandalone}
         actions={data.stockCorporateActionData}
       />
 
@@ -123,7 +124,7 @@ export default async function CompanyPage({ params }: PageProps) {
       <ShareholdingPattern shareholding={data.shareholding} />
 
       {/* 9. Cash Flow */}
-      <CashFlow rows={data.cashFlow} />
+      <CashFlow rows={data.cashFlow} standaloneRows={data.cashFlowStandalone} />
 
       {/* 10. Revenue by Segment (cash flow ke bad) */}
       <RevenueBySegment data={data.segmentRevenue} />

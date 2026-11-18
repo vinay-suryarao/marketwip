@@ -32,6 +32,11 @@ export type CompanyData = {
   balanceSheet?: FinancialRow[];
   cashFlow?: FinancialRow[];
 
+  quarterlyResultsStandalone?: QuarterlyRow[];
+  profitLossStandalone?: FinancialRow[];
+  balanceSheetStandalone?: FinancialRow[];
+  cashFlowStandalone?: FinancialRow[];
+
   shareholding?: ShareholdingCategory[];
 
   peerCompanyList?: PeerRow[];

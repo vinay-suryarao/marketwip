@@ -444,32 +444,32 @@ export async function fetchStockData(name: string): Promise<CompanyData> {
 
     // Annual P&L — screener.in exact format
     data.profitLoss = buildFinancialTable(enrichedRatios, [
-      { key: "operatingRevenue", label: "Sales +" },
-      { key: "operatingExpenses", label: "Expenses +" },
+      { key: "operatingRevenue", label: "Sales" },
+      { key: "operatingExpenses", label: "Expenses" },
       { key: "operatingProfit", label: "Operating Profit" },
       { key: "opm", label: "OPM %" },
-      { key: "otherIncome", label: "Other Income +" },
+      { key: "otherIncome", label: "Other Income" },
       { key: "interest", label: "Interest" },
       { key: "depreciation", label: "Depreciation" },
       { key: "profitBeforeTax", label: "Profit before tax" },
       { key: "tax", label: "Tax %" },
-      { key: "netProfit", label: "Net Profit +" },
+      { key: "netProfit", label: "Net Profit" },
       { key: "epsInRs", label: "EPS in Rs" },
       { key: "dividendPayout", label: "Dividend Payout %" },
     ]);
 
     // Quarterly results — screener.in exact format
     data.quarterlyResults = buildFinancialTable(enrichedRatios, [
-      { key: "operatingRevenue", label: "Sales +" },
-      { key: "operatingExpenses", label: "Expenses +" },
+      { key: "operatingRevenue", label: "Sales" },
+      { key: "operatingExpenses", label: "Expenses" },
       { key: "operatingProfit", label: "Operating Profit" },
       { key: "opm", label: "OPM %" },
-      { key: "otherIncome", label: "Other Income +" },
+      { key: "otherIncome", label: "Other Income" },
       { key: "interest", label: "Interest" },
       { key: "depreciation", label: "Depreciation" },
       { key: "profitBeforeTax", label: "Profit before tax" },
       { key: "tax", label: "Tax %" },
-      { key: "netProfit", label: "Net Profit +" },
+      { key: "netProfit", label: "Net Profit" },
       { key: "epsInRs", label: "EPS in Rs" },
     ]);
 
@@ -644,13 +644,13 @@ export async function fetchStockData(name: string): Promise<CompanyData> {
     data.balanceSheet = buildFinancialTable(enrichedBs, [
       { key: "equityCapital", label: "Equity Capital" },
       { key: "reserves", label: "Reserves" },
-      { key: "borrowings", label: "Borrowings +" },
-      { key: "otherLiabilities", label: "Other Liabilities +" },
+      { key: "borrowings", label: "Borrowings" },
+      { key: "otherLiabilities", label: "Other Liabilities" },
       { key: "totalLiabilitiesScreener", label: "Total Liabilities" },
-      { key: "fixedAssets", label: "Fixed Assets +" },
+      { key: "fixedAssets", label: "Fixed Assets" },
       { key: "cwip", label: "CWIP" },
       { key: "investments", label: "Investments" },
-      { key: "otherAssets", label: "Other Assets +" },
+      { key: "otherAssets", label: "Other Assets" },
       { key: "totalAssets", label: "Total Assets" },
     ]);
   }
@@ -659,9 +659,9 @@ export async function fetchStockData(name: string): Promise<CompanyData> {
   const cfRatios = cfData?.ratios || cfData?.data || (Array.isArray(cfData) ? cfData : null);
   if (cfRatios && Array.isArray(cfRatios)) {
     data.cashFlow = buildFinancialTable(cfRatios, [
-      { key: "operatingCashFlow", label: "Cash from Operating Activity +" },
-      { key: "investingCashFlow", label: "Cash from Investing Activity +" },
-      { key: "financingCashFlow", label: "Cash from Financing Activity +" },
+      { key: "operatingCashFlow", label: "Cash from Operating Activity" },
+      { key: "investingCashFlow", label: "Cash from Investing Activity" },
+      { key: "financingCashFlow", label: "Cash from Financing Activity" },
       { key: "fcf", label: "Free Cash Flow" },
       { key: "capex", label: "Capital Expenditure" },
       { key: "fcfPerShare", label: "FCF Per Share" },
@@ -747,6 +747,131 @@ export async function fetchStockData(name: string): Promise<CompanyData> {
       annual: segAnnualData?.segment_revenues || [],
       quarterly: segQuarterlyData?.segment_revenues || [],
     };
+  }
+
+  // ── Batch 3: Standalone financials (statement_type=c) ──
+  // On free tier these may return the same data or empty; on paid tier they return standalone figures.
+  await delay(300);
+
+  const [plStandalone, bsStandalone, cfStandalone] = await Promise.all([
+    finedgeFetchSafe(`/basic-financials/${encodeURIComponent(symbol)}?statement_type=c&statement_code=pl`),
+    finedgeFetchSafe(`/basic-financials/${encodeURIComponent(symbol)}?statement_type=c&statement_code=bs`),
+    finedgeFetchSafe(`/basic-financials/${encodeURIComponent(symbol)}?statement_type=c&statement_code=cf`),
+  ]);
+
+  // ─── Build Standalone P&L table ───
+  const plStandaloneRatios = plStandalone?.ratios || plStandalone?.data || (Array.isArray(plStandalone) ? plStandalone : null);
+  if (plStandaloneRatios && Array.isArray(plStandaloneRatios)) {
+    const enrichedStandalone = plStandaloneRatios.map((r: any) => {
+      const enriched = { ...r };
+      if (r.operatingProfit != null && r.operatingRevenue != null && r.operatingRevenue !== 0) {
+        enriched.opm = r.operatingProfit / r.operatingRevenue;
+      }
+      if (r.ebitda != null && r.ebit != null) {
+        enriched.depreciation = r.ebitda - r.ebit;
+      }
+      if (r.ebitda != null && r.operatingProfit != null) {
+        const diff = r.ebitda - r.operatingProfit;
+        if (diff >= 0) enriched.otherIncome = diff;
+      }
+      if (r.operatingProfit != null && enriched.otherIncome != null && enriched.depreciation != null && r.ebit != null) {
+        const interest = r.operatingProfit + enriched.otherIncome - enriched.depreciation - r.ebit;
+        if (interest > 0) enriched.interest = interest;
+      }
+      if (r.ebit != null) enriched.profitBeforeTax = r.ebit;
+      if (r.ebit != null && r.tax != null) enriched.netProfit = r.ebit * (1 - r.tax);
+      const shares = r.sharesOutstanding || r.dilutedSharesOutstanding;
+      if (enriched.netProfit != null && shares) enriched.epsInRs = enriched.netProfit / shares;
+      return enriched;
+    });
+
+    data.profitLossStandalone = buildFinancialTable(enrichedStandalone, [
+      { key: "operatingRevenue", label: "Sales" },
+      { key: "operatingExpenses", label: "Expenses" },
+      { key: "operatingProfit", label: "Operating Profit" },
+      { key: "opm", label: "OPM %" },
+      { key: "otherIncome", label: "Other Income" },
+      { key: "interest", label: "Interest" },
+      { key: "depreciation", label: "Depreciation" },
+      { key: "profitBeforeTax", label: "Profit before tax" },
+      { key: "tax", label: "Tax %" },
+      { key: "netProfit", label: "Net Profit" },
+      { key: "epsInRs", label: "EPS in Rs" },
+      { key: "dividendPayout", label: "Dividend Payout %" },
+    ]);
+
+    data.quarterlyResultsStandalone = buildFinancialTable(enrichedStandalone, [
+      { key: "operatingRevenue", label: "Sales" },
+      { key: "operatingExpenses", label: "Expenses" },
+      { key: "operatingProfit", label: "Operating Profit" },
+      { key: "opm", label: "OPM %" },
+      { key: "otherIncome", label: "Other Income" },
+      { key: "interest", label: "Interest" },
+      { key: "depreciation", label: "Depreciation" },
+      { key: "profitBeforeTax", label: "Profit before tax" },
+      { key: "tax", label: "Tax %" },
+      { key: "netProfit", label: "Net Profit" },
+      { key: "epsInRs", label: "EPS in Rs" },
+    ]);
+  }
+
+  // ─── Build Standalone Balance Sheet table ───
+  const bsStandaloneRatios = bsStandalone?.ratios || bsStandalone?.data || (Array.isArray(bsStandalone) ? bsStandalone : null);
+  if (bsStandaloneRatios && Array.isArray(bsStandaloneRatios)) {
+    const enrichedBsStandalone = bsStandaloneRatios.map((r: any) => {
+      const enriched = { ...r };
+      enriched.equityCapital = r.shareCapital;
+      enriched.reserves = r.totalReserves;
+      enriched.borrowings = r.totalDebt ?? ((r.longTermBorrowings || 0) + (r.shortTermBorrowings || 0));
+      const totalLiab = r.totalEquityAndLiabilities || r.totalAssets;
+      enriched.totalLiabilitiesScreener = totalLiab;
+      const eqCap = r.shareCapital || 0;
+      const res = r.totalReserves || 0;
+      const borrow = enriched.borrowings || 0;
+      if (totalLiab != null) {
+        const otherLiab = totalLiab - (eqCap + res + borrow);
+        enriched.otherLiabilities = otherLiab > 0 ? otherLiab : (r.totalPayables || null);
+      }
+      if (r.tangibleBookValue != null) enriched.fixedAssets = r.tangibleBookValue;
+      enriched.cwip = r.cwip ?? r.capitalWorkInProgress ?? null;
+      enriched.investments = r.investments ?? r.totalInvestments ?? null;
+      if (r.totalAssets != null) {
+        const knownDeductions = (enriched.fixedAssets || 0) + (enriched.cwip || 0) + (enriched.investments || 0);
+        const otherAssets = r.totalAssets - knownDeductions;
+        enriched.otherAssets = otherAssets > 0 ? otherAssets : (r.totalCash || 0) + (r.totalReceivables || 0);
+      }
+      return enriched;
+    });
+
+    data.balanceSheetStandalone = buildFinancialTable(enrichedBsStandalone, [
+      { key: "equityCapital", label: "Equity Capital" },
+      { key: "reserves", label: "Reserves" },
+      { key: "borrowings", label: "Borrowings" },
+      { key: "otherLiabilities", label: "Other Liabilities" },
+      { key: "totalLiabilitiesScreener", label: "Total Liabilities" },
+      { key: "fixedAssets", label: "Fixed Assets" },
+      { key: "cwip", label: "CWIP" },
+      { key: "investments", label: "Investments" },
+      { key: "otherAssets", label: "Other Assets" },
+      { key: "totalAssets", label: "Total Assets" },
+    ]);
+  }
+
+  // ─── Build Standalone Cash Flow table ───
+  const cfStandaloneRatios = cfStandalone?.ratios || cfStandalone?.data || (Array.isArray(cfStandalone) ? cfStandalone : null);
+  if (cfStandaloneRatios && Array.isArray(cfStandaloneRatios)) {
+    data.cashFlowStandalone = buildFinancialTable(cfStandaloneRatios, [
+      { key: "operatingCashFlow", label: "Cash from Operating Activity" },
+      { key: "investingCashFlow", label: "Cash from Investing Activity" },
+      { key: "financingCashFlow", label: "Cash from Financing Activity" },
+      { key: "fcf", label: "Free Cash Flow" },
+      { key: "capex", label: "Capital Expenditure" },
+      { key: "fcfPerShare", label: "FCF Per Share" },
+      { key: "cashFlowMargin", label: "Cash Flow Margin" },
+      { key: "newDebtIssued", label: "New Debt Issued" },
+      { key: "debtRepayment", label: "Debt Repayment" },
+      { key: "equityProceeds", label: "Equity Proceeds" },
+    ]);
   }
 
   // ─── Peer Comparison List ───

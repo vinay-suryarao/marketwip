@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import type { FinancialRow } from "@/types/analyzer";
 
-type Props = { rows?: FinancialRow[] };
+type Props = {
+  rows?: FinancialRow[];
+  standaloneRows?: FinancialRow[];
+};
 
 const HIGHLIGHT_METRICS = [
   "operating profit",
@@ -16,9 +22,13 @@ function isHighlighted(metric: string): boolean {
   return HIGHLIGHT_METRICS.some((h) => metric.toLowerCase().includes(h));
 }
 
-export default function ProfitLoss({ rows }: Props) {
-  if (!rows || !Array.isArray(rows) || rows.length === 0) return null;
-  const validRows = rows.filter((r) => r != null && typeof r === "object");
+export default function ProfitLoss({ rows, standaloneRows }: Props) {
+  const [viewMode, setViewMode] = useState<"consolidated" | "standalone">("consolidated");
+
+  const activeRows = viewMode === "standalone" && standaloneRows?.length ? standaloneRows : rows;
+
+  if (!activeRows || !Array.isArray(activeRows) || activeRows.length === 0) return null;
+  const validRows = activeRows.filter((r) => r != null && typeof r === "object");
   if (validRows.length === 0) return null;
 
   const columns = Object.keys(validRows[0]);
@@ -27,7 +37,15 @@ export default function ProfitLoss({ rows }: Props) {
     <section className="rounded-3xl border border-[#d8e2f5] bg-white p-6 shadow-[0_12px_28px_rgba(24,58,120,0.1)] sm:p-8">
       <div className="mb-5 border-b border-[#d8e2f5] pb-4">
         <h2 className="text-2xl font-extrabold text-[#173462] sm:text-3xl">Profit &amp; Loss</h2>
-        <p className="mt-1 text-xs font-medium text-[#8599c1]">Consolidated Figures in Rs. Crores</p>
+        <p className="mt-1 text-xs font-medium text-[#8599c1]">
+          {viewMode === "consolidated" ? "Consolidated" : "Standalone"} Figures in Rs. Crores /{" "}
+          <button
+            onClick={() => setViewMode(viewMode === "consolidated" ? "standalone" : "consolidated")}
+            className="cursor-pointer text-[#4f46e5] hover:underline"
+          >
+            {viewMode === "consolidated" ? "View Standalone" : "View Consolidated"}
+          </button>
+        </p>
       </div>
 
       <div className="-mx-2 overflow-x-auto px-2">
@@ -37,7 +55,11 @@ export default function ProfitLoss({ rows }: Props) {
               {columns.map((col, idx) => (
                 <th
                   key={col}
-                  className={`whitespace-nowrap px-3 py-3 text-[11px] font-bold uppercase tracking-[0.08em] text-[#6074a0] ${idx === 0 ? "text-left" : ""}`}
+                  className={`whitespace-nowrap px-3 py-3 text-[11px] font-bold uppercase tracking-[0.08em] text-[#6074a0] ${
+                    idx === 0
+                      ? "sticky left-0 z-10 bg-white text-left"
+                      : ""
+                  }`}
                 >
                   {col}
                 </th>
@@ -62,7 +84,7 @@ export default function ProfitLoss({ rows }: Props) {
                       key={col}
                       className={`whitespace-nowrap px-3 py-2.5 ${
                         cIdx === 0
-                          ? `text-left font-semibold ${highlight ? "text-[#173462]" : "text-[#3d5178]"}`
+                          ? `sticky left-0 z-10 text-left font-semibold ${highlight ? "bg-[#f0f4fb] text-[#173462]" : "bg-white text-[#3d5178]"}`
                           : `tabular-nums ${highlight ? "text-[#173462]" : "text-[#3d5178]"}`
                       }`}
                     >

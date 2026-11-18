@@ -119,7 +119,7 @@ export default function RevenueBySegment({ data }: Props) {
           <table className="w-full min-w-[700px] text-right text-sm">
             <thead>
               <tr className="border-b-2 border-[#d8e2f5]">
-                <th className="whitespace-nowrap px-3 py-3 text-left text-[11px] font-bold uppercase tracking-[0.08em] text-[#6074a0]">
+                <th className="sticky left-0 z-10 bg-white whitespace-nowrap px-3 py-3 text-left text-[11px] font-bold uppercase tracking-[0.08em] text-[#6074a0]">
                   Segment
                 </th>
                 {periods.map((p, idx) => (
@@ -140,7 +140,7 @@ export default function RevenueBySegment({ data }: Props) {
                     key={segName}
                     className="border-b border-[#eef3fb] transition hover:bg-[#f5f8ff]"
                   >
-                    <td className="whitespace-nowrap px-3 py-3 text-left">
+                    <td className="sticky left-0 z-10 bg-white whitespace-nowrap px-3 py-3 text-left">
                       <p className="font-semibold text-[#173462]">{segName} Segment Revenue</p>
                       <p className="text-[10px] text-[#8599c1]">Rs. cr · Standalone data</p>
                     </td>
@@ -167,7 +167,7 @@ export default function RevenueBySegment({ data }: Props) {
                     key={`${segName}-profit`}
                     className="border-b border-[#eef3fb] transition hover:bg-[#f5f8ff]"
                   >
-                    <td className="whitespace-nowrap px-3 py-3 text-left">
+                    <td className="sticky left-0 z-10 bg-white whitespace-nowrap px-3 py-3 text-left">
                       <p className="font-semibold text-[#173462]">{segName} Segment EBITDA</p>
                       <p className="text-[10px] text-[#8599c1]">Rs. cr · Standalone data</p>
                     </td>
@@ -189,7 +189,7 @@ export default function RevenueBySegment({ data }: Props) {
 
               {/* Total Segment Revenue Row */}
               <tr className="border-b-2 border-[#d0d9ef] bg-[#f0f4fb] font-extrabold">
-                <td className="whitespace-nowrap px-3 py-3 text-left">
+                <td className="sticky left-0 z-10 bg-[#f0f4fb] whitespace-nowrap px-3 py-3 text-left">
                   <p className="font-extrabold text-[#173462]">Total Segment Revenue</p>
                   <p className="text-[10px] font-normal text-[#8599c1]">Rs. cr · Standalone data</p>
                 </td>
@@ -208,7 +208,7 @@ export default function RevenueBySegment({ data }: Props) {
 
               {/* Segment Profit Before Tax */}
               <tr className="border-b border-[#d0d9ef] bg-[#f0f4fb] font-extrabold">
-                <td className="whitespace-nowrap px-3 py-3 text-left">
+                <td className="sticky left-0 z-10 bg-[#f0f4fb] whitespace-nowrap px-3 py-3 text-left">
                   <p className="font-extrabold text-[#173462]">Segment Profit Before Tax</p>
                   <p className="text-[10px] font-normal text-[#8599c1]">Rs. cr · Standalone data</p>
                 </td>
